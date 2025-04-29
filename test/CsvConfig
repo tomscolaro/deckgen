@@ -1,0 +1,73 @@
+ApiVersion:
+    0.1.0
+
+Presentation:
+    Output:
+        Layout:
+            TitleLayout
+        Name:
+            Output Presentation
+        Author:
+            John Doe
+        Path:
+            output_test.pptx
+    
+    Template:
+        Path:
+            test/template.pptx
+        ColorStyle:
+            Default
+
+    Data: 
+    # leave the "-", it is a way of initializing a list in yaml
+    -    Name: TestData
+         Type: File
+         Path: test/test.csv
+
+    Slides:
+        - Title:
+            Testing Slide
+
+          Charts:
+            - Name:
+                ChartTitle
+              Type:
+                hist
+              DataNameRef:
+                TestData
+              Location:
+                1
+              Measure:
+                measure_0
+              Dimension:
+                cat_1
+              Filters:
+
+              -  AND:
+                  - Column: cat_1
+                    Type: '!='
+                    Value: group_0
+                  - Column: cat_1
+                    Type: '!='
+                    Value: group_2
+          Layout:
+            ChartCenter
+        - Title:
+            testing 2
+  
+          Charts:
+            - Name:
+                ChartTitle
+              Type:
+                scatter
+              DataNameRef:
+                TestData
+              Location:
+                1
+              Measure:
+                cat_0
+              Dimension:
+                cat_1
+
+          Layout:
+            ChartLeft-TextRight

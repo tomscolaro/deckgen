@@ -1,0 +1,5 @@
+pandas>=2.2
+numpy>=1.22
+python-dateutil>=2.8
+python-pptx
+pyyaml
