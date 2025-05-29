@@ -5,8 +5,11 @@ from pptx.dml.color import RGBColor
 from pptx_config import get_chart_type  
 
 import seaborn as sns
+sns.color_palette("crest", as_cmap=True)
 import matplotlib.pyplot as plt
 import tempfile
+import polars as pl
+from great_tables import GT, md, html
 
 
 # Function to get the chart type object from a string
@@ -14,112 +17,130 @@ class ChartHandler:
     def __init__(self, slide_idx, chartConfig, dataGenerator):
     # self.config = self.config_to_dict(config_path)
         print(chartConfig)
-        dataGenerator.register_filters(slide_idx, chartConfig)
-        chartIdx= chartConfig['Location']
-        chartDataNameRef= chartConfig['DataNameRef']
+        self.palette ='magma'
 
         self.chartType = chartConfig['Type']
-        self.measure = chartConfig['Measure']
-        self.dimension = chartConfig['Dimension']
 
-        self.data = dataGenerator.get_data(slide_idx, chartIdx, chartDataNameRef)
+        if self.chartType == 'image':
+              self.chartPath = chartConfig['ImagePath']
+              self.size = eval(chartConfig['Size'])
+        else:
+            if self.chartType == 'table':
+                self.chartSubTitle = chartConfig['Subtitle']
+
+            dataGenerator.register_filters(slide_idx, chartConfig)
+            chartIdx= chartConfig['Location']
+            chartDataNameRef= chartConfig['DataNameRef']
+
+      
+            self.measure = chartConfig['Measure']
+            self.dimension = chartConfig['Dimension']
+            self.size = eval(chartConfig['Size'])
+
+            self.data = dataGenerator.get_data(slide_idx, chartIdx, chartDataNameRef)
+
+        self.containsSecondAxis = chartConfig.get('SecondaryMeasure', None) != None
+        if self.containsSecondAxis:
+            # self.secondaryDim =  chartConfig['SecondaryDimension']
+            self.secondaryMeasure =  chartConfig['SecondaryMeasure']
+
+
         return
 
 
     def insertChart(self, placeholder):
-        plt.figure()
+       
+        # plt.figure()
+        if self.chartType == 'image':
+            placeholder.insert_picture(self.chartPath, )
+            return
 
         dimension = self.dimension
         measure = self.measure
         data = self.data
 
         complex_plot = None
+        table_plot = None
+
+        ax = sns.set_style(style=None, rc=None )
+
+        fig, ax = plt.subplots(figsize=self.size)
+
+
+
+
         if self.chartType == 'bar':
-            sns.barplot(x=dimension, y=measure, data=data)
+            sns.barplot(x=dimension, y=measure, data=data, palette=self.palette, ax=ax)
         elif self.chartType == 'line':
-            sns.lineplot(x=dimension, y=measure, data=data)
+            sns.lineplot(x=dimension, y=measure, data=data, palette=self.palette, ax=ax)
         elif self.chartType == 'scatter':
-            sns.scatterplot(x=dimension, y=measure, data=data)
+            sns.scatterplot(x=dimension, y=measure, data=data, palette=self.palette, ax=ax)
         elif self.chartType == 'box':
-            sns.boxplot(x=dimension, y=measure, data=data)
+            sns.boxplot(x=dimension, y=measure, data=data, palette=self.palette, ax=ax)
         elif self.chartType == 'violin':
-            sns.violinplot(x=dimension, y=measure, data=data)
+            sns.violinplot(x=dimension, y=measure, data=data, palette=self.palette, ax=ax)
         elif self.chartType == 'hist':
-            sns.histplot(data=data, x=measure, hue=dimension, multiple="stack")
+            sns.histplot(data=data, x=measure, hue=dimension, multiple="stack", palette=self.palette, ax=ax)
         elif self.chartType == 'strip':
-            sns.stripplot(x=dimension, y=measure, data=data)
+            sns.stripplot(x=dimension, y=measure, data=data, palette=self.palette, ax=ax)
         elif self.chartType == 'swarm':
-            sns.swarmplot(x=dimension, y=measure, data=data)
+            sns.swarmplot(x=dimension, y=measure, data=data, palette=self.palette, ax=ax)
         elif self.chartType == 'kde':
-            sns.kdeplot(data=data, x=measure, hue=dimension, fill=True)
+            sns.kdeplot(data=data, x=measure, hue=dimension, fill=True, palette=self.palette, ax=ax)
         elif self.chartType == 'count':
-            sns.countplot(x=dimension, data=data)
+            sns.countplot(x=dimension, data=data, palette=self.palette, ax=ax)
         elif self.chartType == 'lm':
-            sns.lmplot(x=dimension, y=measure, data=data)
+            sns.lmplot(x=dimension, y=measure, data=data, palette=self.palette, ax=ax)
             complex_plot = 'lm'
         elif self.chartType == 'pairplot':
-            sns.pairplot(data)
+            sns.pairplot(data, palette=self.palette, ax=ax)
             complex_plot = 'pairplot'
+
+
+        elif self.chartType == 'table':
+            # sns.pairplot(data, palette=self.palette)
+            data = pl.from_pandas(data).sort(measure, descending=True).head(10)
+            gt_tbl = GT(data).tab_header(
+                title="Top {} by {}".format(dimension, measure),
+                # subtitle=""
+            )
+            table_plot = True
+        
         else:
             raise ValueError(f"Unsupported chart_type: {self.chartType}")
+
+        if self.containsSecondAxis:
+            ax2 = ax.twinx()
+            sns.lineplot(data = data, x=dimension, y=self.secondaryMeasure, palette=self.palette, alpha=0.8, ax=ax2)
+
+
 
         plt.title(f'{measure} by {dimension}')
         # plt.tight_layout()
         with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as tmpfile:    
             if complex_plot:
+
                 plt.close()  # Close original
-                plt.figure()  # Dummy figure to avoid issues
+                plt.figure(self.size)  # Dummy figure to avoid issues
+                # plt.tight_layout()
                 # For pairplot/lmplot which create their own fig
+                plt.tight_layout(pad=3.0) 
                 plot = sns.pairplot(data) if self.chartType == 'pairplot' else sns.lmplot(x=dimension, y=measure, data=data)
                 plot.savefig(tmpfile.name)
+            
+            elif table_plot :
+                gt_tbl.save(file=tmpfile.name, web_driver='firefox', window_size=(4000,2000 ))
+                # gt_tbl.save(file="test.png", web_driver='edge', window_size=(1000,1000))
             else:
                 plt.title(f'{self.chartType.capitalize()} plot of {measure} by {dimension}')
-                plt.tight_layout()
+                plt.tight_layout(pad=3.0)
                 plt.savefig(tmpfile.name)
                 plt.close()
+
+
             img_path = tmpfile.name
 
 
         placeholder.insert_picture(img_path)
 
-    def insertExcelChart(self,placeholder):
-    # Formatting based on the chart type
-        chart_type = get_chart_type(self.chartType)
-        chart_data = CategoryChartData()
-        
-        chart_data.categories = self.data[self.dimension]
-        chart_data.add_series(self.measure, (self.data[self.measure].tolist()))  # Multiply by 100 to convert to percentage
-
-    
-        chart_frame = placeholder.insert_chart(chart_type, chart_data)
-        chart = chart_frame.chart
-
-        if chart_type in (XL_CHART_TYPE.BAR_CLUSTERED, XL_CHART_TYPE.COLUMN_CLUSTERED, XL_CHART_TYPE.LINE_MARKERS):
-            for series in chart.series:
-                fill = series.format.fill
-                fill.solid()
-                # fill.fore_color.rgb = RGBColor(0x14, 0x60, 0x82)  # Default blue color
-
-                # Add data labels formatted as percentages with no decimal points
-                series.has_data_labels = True
-                for point in series.points:
-                    # point.data_label.number_format = '0%'
-                    point.data_label.font.size = Pt(10)
-                    point.data_label.font.color.rgb = RGBColor(0x00, 0x00, 0x00)  # Black font color
-                    
-                # Remove the chart title and legend
-                chart.has_title = False
-                chart.has_legend = False
-
-                # Remove the chart axis
-                chart.value_axis.visible = False
-                chart.category_axis.visible = True
-
-            # Remove gridlines for all charts
-            if chart.category_axis and chart.category_axis.has_major_gridlines:
-                chart.category_axis.major_gridlines.format.line.fill.background()
-
-            if chart.value_axis and chart.value_axis.has_major_gridlines:
-                chart.value_axis.major_gridlines.format.line.fill.background()
-
-        return
+   

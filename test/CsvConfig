@@ -33,6 +33,8 @@ Presentation:
                 ChartTitle
               Type:
                 hist
+              Size:
+                (8,6)
               DataNameRef:
                 TestData
               Location:
@@ -41,6 +43,11 @@ Presentation:
                 measure_0
               Dimension:
                 cat_1
+              # SecondaryDimension:
+              #   cat_0
+              SecondaryMeasure:
+                measure_1
+                
               Filters:
 
               -  AND:
@@ -59,15 +66,41 @@ Presentation:
             - Name:
                 ChartTitle
               Type:
-                scatter
+                image
+              Size:
+                (5,5)
+              ImagePath:
+                ./image_path.png
+              Location:
+                1     
+          Layout:
+            ChartLeft-TextRight
+            
+        - Title:
+            table testing
+  
+          Charts:
+            - Name:
+                ChartTitle
+              Subtitle:
+                ChartTitle
+              Type:
+                table
+              Size:
+                (5,5)
+                   
               DataNameRef:
                 TestData
               Location:
                 1
               Measure:
-                cat_0
+                measure_0
               Dimension:
                 cat_1
+              # Filters:
+              Location:
+                1
+            
 
           Layout:
             ChartLeft-TextRight
