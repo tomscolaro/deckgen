@@ -11,12 +11,15 @@ import tempfile
 import polars as pl
 from great_tables import GT, md, html
 
+from custom_charts.custom import custom
+
 
 # Function to get the chart type object from a string
 class ChartHandler:
     def __init__(self, slide_idx, chartConfig, dataGenerator):
     # self.config = self.config_to_dict(config_path)
         print(chartConfig)
+        self.chartConfig = chartConfig
         self.palette ='magma'
 
         self.chartType = chartConfig['Type']
@@ -105,7 +108,12 @@ class ChartHandler:
                 # subtitle=""
             )
             table_plot = True
-        
+
+        elif self.chartType == 'custom':
+
+            print("hello")
+
+
         else:
             raise ValueError(f"Unsupported chart_type: {self.chartType}")
 
@@ -144,3 +152,7 @@ class ChartHandler:
         placeholder.insert_picture(img_path)
 
    
+
+if __name__ == '__main__':
+    
+    print(custom)

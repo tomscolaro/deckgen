@@ -1,0 +1,89 @@
+
+
+
+
+class doublecluster:
+    def __init__(self, ):
+        self.data = None
+        return
+    
+    def add_data(self, df):
+        self.data = df
+
+    def data_prep(self):    
+
+
+        return 
+    
+    def plot(self):
+        
+        # Define time periods
+        all_dates = sorted(data['date'].unique())
+        x = range(len(all_dates))
+        bar_width = 0.35
+
+        # Separate condition types
+        false_data = data[~data['condition']]
+        true_data = data[data['condition']]
+
+        # Pivot table for stacked bars
+        stacked_pivot = false_data.pivot_table(
+            index='date',
+            columns='category',
+            values='value',
+            aggfunc='sum',
+            fill_value=0
+        ).reindex(all_dates, fill_value=0)
+
+        # True totals
+        true_totals = true_data.groupby('date')['value'].sum().reindex(all_dates, fill_value=0)
+
+        # Plot with Seaborn style but Matplotlib logic
+        fig, ax = plt.subplots(figsize=(10, 6))
+
+        # Get colors from seaborn palette
+        palette = sns.color_palette("pastel", n_colors=len(stacked_pivot.columns))
+        category_colors = dict(zip(stacked_pivot.columns, palette))
+
+        # X positions
+        x_stacked = [i - bar_width/2 for i in x]
+        x_total = [i + bar_width/2 for i in x]
+
+        # Plot stacked bars
+        bottom = [0] * len(all_dates)
+        for category in stacked_pivot.columns:
+            values = stacked_pivot[category].tolist()
+            ax.bar(
+                x_stacked,
+                values,
+                bottom=bottom,
+                width=bar_width,
+                label=f'{category} (stacked)',
+                color=category_colors[category]
+            )
+            bottom = [b + v for b, v in zip(bottom, values)]
+
+        # Plot total bars
+        ax.bar(
+            x_total,
+            true_totals.tolist(),
+            width=bar_width,
+            label='Total (True)',
+            color=sns.color_palette("grey")[3]
+        )
+
+
+
+        # Final formatting
+        ax.set_xticks(x)
+        ax.set_xticklabels(all_dates)
+        ax.set_ylabel('Value')
+        ax.set_title('Clustered Column Chart: Stacked + Total Bars')
+
+        # Move legend to the bottom
+        ax.legend(loc='lower center', bbox_to_anchor=(0.5, -0.15), ncol=4, frameon=False)
+
+        plt.tight_layout()
+        plt.show()
+
+        return
