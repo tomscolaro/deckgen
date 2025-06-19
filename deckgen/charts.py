@@ -27,6 +27,17 @@ class ChartHandler:
         if self.chartType == 'image':
               self.chartPath = chartConfig['ImagePath']
               self.size = eval(chartConfig['Size'])
+
+        elif self.chartType == 'custom':
+             
+
+             self.args = chartConfig['Args']
+             dataGenerator.register_filters(slide_idx, chartConfig)
+             chartIdx= chartConfig['Location']
+             chartDataNameRef= chartConfig['DataNameRef']
+             self.size = eval(chartConfig['Size'])
+             self.data = dataGenerator.get_data(slide_idx, chartIdx, chartDataNameRef)
+
         else:
             if self.chartType == 'table':
                 self.chartSubTitle = chartConfig['Subtitle']
@@ -57,17 +68,22 @@ class ChartHandler:
         if self.chartType == 'image':
             placeholder.insert_picture(self.chartPath, )
             return
+        
 
-        dimension = self.dimension
-        measure = self.measure
-        data = self.data
+        if self.chartType == "custom":
+            customChartObj = custom[self.args['chartType']]
+            customChartObj.add_data(df=self.data)
+            customChartObj.prep_data(**self.args)
+            customChartObj.plot()
 
-        complex_plot = None
-        table_plot = None
-
-        ax = sns.set_style(style=None, rc=None )
-
-        fig, ax = plt.subplots(figsize=self.size)
+        else:
+            dimension = self.dimension
+            measure = self.measure
+            data = self.data
+            complex_plot = None
+            table_plot = None
+            ax = sns.set_style(style=None, rc=None )
+            fig, ax = plt.subplots(figsize=self.size)
 
 
 
@@ -109,10 +125,7 @@ class ChartHandler:
             )
             table_plot = True
 
-        elif self.chartType == 'custom':
-
-            print("hello")
-
+  
 
         else:
             raise ValueError(f"Unsupported chart_type: {self.chartType}")

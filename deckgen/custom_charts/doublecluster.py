@@ -1,45 +1,53 @@
 
-
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 
 class doublecluster:
-    def __init__(self, ):
+    def __init__(self, **kwargs):
         self.data = None
         return
     
     def add_data(self, df):
         self.data = df
+        return
 
-    def data_prep(self):    
+    def prep_data(self,  **kwargs):    
+        # self.data = ''
+        self.XAxis = kwargs['XAxis']
+        self.labelFilter = kwargs['labelIndicator']
+        self.label = kwargs['label']
+        self.val = kwargs['value']
 
-
+        self.size = kwargs['size']
         return 
     
     def plot(self):
         
         # Define time periods
-        all_dates = sorted(data['date'].unique())
+        all_dates = sorted(self.data[self.XAxis].unique())
         x = range(len(all_dates))
         bar_width = 0.35
 
         # Separate condition types
-        false_data = data[~data['condition']]
-        true_data = data[data['condition']]
+        false_data = self.data[~self.data[self.labelFilter]]
+        true_data = self.data[self.data[self.labelFilter]]
 
         # Pivot table for stacked bars
         stacked_pivot = false_data.pivot_table(
-            index='date',
-            columns='category',
-            values='value',
+            index=self.XAxis,
+            columns=self.label,
+            values=self.val,
             aggfunc='sum',
             fill_value=0
         ).reindex(all_dates, fill_value=0)
 
         # True totals
-        true_totals = true_data.groupby('date')['value'].sum().reindex(all_dates, fill_value=0)
+        true_totals = true_data.groupby(self.XAxis)[self.val].sum().reindex(all_dates, fill_value=0)
 
         # Plot with Seaborn style but Matplotlib logic
-        fig, ax = plt.subplots(figsize=(10, 6))
+        fig, ax = plt.subplots(figsize=self.size)
 
         # Get colors from seaborn palette
         palette = sns.color_palette("pastel", n_colors=len(stacked_pivot.columns))
@@ -58,7 +66,7 @@ class doublecluster:
                 values,
                 bottom=bottom,
                 width=bar_width,
-                label=f'{category} (stacked)',
+                label=f'{category}',
                 color=category_colors[category]
             )
             bottom = [b + v for b, v in zip(bottom, values)]

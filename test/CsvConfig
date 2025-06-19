@@ -23,6 +23,9 @@ Presentation:
     -    Name: TestData
          Type: File
          Path: test/test.csv
+    -    Name: CardTestData
+         Type: File
+         Path: test/cardtest.csv
 
     Slides:
         - Title:
@@ -59,6 +62,35 @@ Presentation:
                     Value: group_2
           Layout:
             ChartCenter
+
+        - Title:
+            Testing Slide
+
+          Charts:
+            - Name:
+                ChartTitle
+              Type:
+                custom
+              Size:
+                (8,6)
+              DataNameRef:
+                TestData
+              Location:
+                1
+              Args:
+                {"chartType": 'card', "kpi_title": "cat_0", "kpi_value":"measure_0", "kpi_delta": "measure_0", "kpi_text":"this is test", "delta_color":"#2ecc71" }
+                
+              Filters:
+
+              -  AND:
+                  - Column: cat_1
+                    Type: '!='
+                    Value: group_0
+                  - Column: cat_1
+                    Type: '!='
+                    Value: group_2
+          Layout:
+            ChartCenter 
         - Title:
             testing 2
   
