@@ -23,25 +23,21 @@ class ChartHandler:
         self.palette ='magma'
 
         self.chartType = chartConfig['Type']
+        self.size = eval(chartConfig['Size'])
 
         if self.chartType == 'image':
               self.chartPath = chartConfig['ImagePath']
-              self.size = eval(chartConfig['Size'])
-
+ 
         elif self.chartType == 'custom':
-             
-
              self.args = chartConfig['Args']
              dataGenerator.register_filters(slide_idx, chartConfig)
              chartIdx= chartConfig['Location']
              chartDataNameRef= chartConfig['DataNameRef']
-             self.size = eval(chartConfig['Size'])
              self.data = dataGenerator.get_data(slide_idx, chartIdx, chartDataNameRef)
 
         else:
             if self.chartType == 'table':
                 self.chartSubTitle = chartConfig['Subtitle']
-
             dataGenerator.register_filters(slide_idx, chartConfig)
             chartIdx= chartConfig['Location']
             chartDataNameRef= chartConfig['DataNameRef']
@@ -49,7 +45,7 @@ class ChartHandler:
       
             self.measure = chartConfig['Measure']
             self.dimension = chartConfig['Dimension']
-            self.size = eval(chartConfig['Size'])
+
 
             self.data = dataGenerator.get_data(slide_idx, chartIdx, chartDataNameRef)
 
@@ -73,8 +69,11 @@ class ChartHandler:
         if self.chartType == "custom":
             customChartObj = custom[self.args['chartType']]
             customChartObj.add_data(df=self.data)
-            customChartObj.prep_data(**self.args)
-            customChartObj.plot()
+            customChartObj.prep_data(size=self.size ,**self.args)
+            img_path = customChartObj.plot()
+
+            placeholder.insert_picture(img_path)
+            return
 
         else:
             dimension = self.dimension
@@ -125,7 +124,8 @@ class ChartHandler:
             )
             table_plot = True
 
-  
+        elif self.chartType == 'custom':
+            print("Evaluating Custom Chart")
 
         else:
             raise ValueError(f"Unsupported chart_type: {self.chartType}")
@@ -134,9 +134,10 @@ class ChartHandler:
             ax2 = ax.twinx()
             sns.lineplot(data = data, x=dimension, y=self.secondaryMeasure, palette=self.palette, alpha=0.8, ax=ax2)
 
+        
+        
 
-
-        plt.title(f'{measure} by {dimension}')
+        # plt.title(f'{measure} by {dimension}')
         # plt.tight_layout()
         with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as tmpfile:    
             if complex_plot:
@@ -163,6 +164,7 @@ class ChartHandler:
 
 
         placeholder.insert_picture(img_path)
+        return
 
    
 

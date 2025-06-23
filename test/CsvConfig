@@ -74,21 +74,14 @@ Presentation:
               Size:
                 (8,6)
               DataNameRef:
-                TestData
+                CardTestData
               Location:
                 1
               Args:
-                {"chartType": 'card', "kpi_title": "cat_0", "kpi_value":"measure_0", "kpi_delta": "measure_0", "kpi_text":"this is test", "delta_color":"#2ecc71" }
+                {"chartType": 'card', "kpi":"test", "kpi_title": "Title", "kpi_value":"Value", "kpi_delta": "Delta", "kpi_text":"Text", "delta_color":"Color" }
                 
-              Filters:
+            
 
-              -  AND:
-                  - Column: cat_1
-                    Type: '!='
-                    Value: group_0
-                  - Column: cat_1
-                    Type: '!='
-                    Value: group_2
           Layout:
             ChartCenter 
         - Title:
