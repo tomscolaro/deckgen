@@ -2,24 +2,13 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import tempfile
+from charts.default import DefaultChart
 
-
-class card:
-    def __init__(self, ):
-        self.data = None
-        # KPI values
-        self.kpi_title = ""
-        self.kpi_value = ""
-        self.kpi_delta = ""
-        self.kpi_text = ""
-        self.delta_color = ""  # green for positive, red if negative
-
-        return
+class card(DefaultChart):
+    def __init__(self, **kwargs):
+        super().__init__()
     
-    def add_data(self, data):
-        self.data = data
-        return 
-    
+
     def prep_args(self, **kwargs):
         print(self.data)
         self.data = self.data[self.data['KPI'] == kwargs['kpi']]
@@ -28,8 +17,6 @@ class card:
         self.kpi_delta = self.data[kwargs['kpi_delta']].values[0]
         self.kpi_text = self.data[kwargs['kpi_text']].values[0]
         self.delta_color = self.data[kwargs['delta_color']].values[0]
-
-    
         return 
     
     def plot(self, size=(4,2)):
@@ -48,16 +35,7 @@ class card:
         for spine in ax.spines.values():
             spine.set_visible(False)
 
-        # plt.tight_layout()
-        # plt.show()
-        with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as tmpfile:    
-            # plt.title(f'{self.chartType.capitalize()} plot of {measure} by {dimension}')
-            plt.tight_layout(pad=3.0)
-            plt.savefig(tmpfile.name)
-            plt.close()
 
-
-            img_path = tmpfile.name
-
+        img_path = self.save_file()
 
         return img_path

@@ -2,16 +2,13 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+from charts.default import DefaultChart
 
 
-class doublecluster:
+
+class doublecluster(DefaultChart):
     def __init__(self, **kwargs):
-        self.data = None
-        return
-    
-    def add_data(self, data):
-        self.data = data
-        return
+        super().__init__()
 
     def prep_args(self,  **kwargs):    
         # self.data = ''
@@ -79,9 +76,6 @@ class doublecluster:
             label='Total (True)',
             color=sns.color_palette("grey")[3]
         )
-
-
-
         # Final formatting
         ax.set_xticks(x)
         ax.set_xticklabels(all_dates)
@@ -91,7 +85,6 @@ class doublecluster:
         # Move legend to the bottom
         ax.legend(loc='lower center', bbox_to_anchor=(0.5, -0.15), ncol=4, frameon=False)
 
-        plt.tight_layout()
-        plt.show()
+        img_path = self.save_file()
 
-        return
+        return img_path

@@ -11,6 +11,7 @@ class DefaultChart:
     def __init__(self):
         self.data = None
         self.palette ='magma'
+        self.chartType = None
         return
     
     def add_data(self, data=-1):
@@ -30,7 +31,8 @@ class DefaultChart:
     
     def save_file(self):
         with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as tmpfile:   
-            plt.title(f'{self.chartType.capitalize()} plot of {self.measure} by {self.dimension}')
+            if self.chartType:
+                plt.title(f'{self.chartType.capitalize()} plot of {self.measure} by {self.dimension}')
             plt.tight_layout(pad=3.0)
             plt.savefig(tmpfile.name)
             plt.close()
