@@ -1,7 +1,7 @@
 import pandas as pd
 from pptx import Presentation
 from utils import ConfigController, find_layout_by_name, read_csvs_to_dfs
-from charts import ChartHandler
+from chart_handler import ChartHandler
 
 class deckGen:
     def __init__(self, mode, config, df=None):
@@ -16,8 +16,6 @@ class deckGen:
                 self.dataGenerator = TestDataGenerator(num_cats=2, num_measures=3, num_personas=10, include_timeseries=True)
         
             case "csv":
-                print("Reading in your CSV file. Hang Tight.")
-                print("Processing DataFrame.. One Moment..")
                 from data_handlers import CsvDataGenerator
                 self.dataGenerator = CsvDataGenerator(self.config.get_data())
             
@@ -76,12 +74,8 @@ class Slide:
             # we caluclate the idx below.  
             ###
             idx = len(slide.placeholders) - chartConfig["Location"] +2
-            
             for _, placeholder in enumerate(slide.placeholders):
-
-                # print("## wtf", idx, placeholder.shape_id, len(slide.placeholders)) # placeholder.idx)
                 if idx == placeholder.shape_id:
-                    #TODO: CHART CONTROLLER   
                     chartController.insertChart(placeholder)
         
         return 

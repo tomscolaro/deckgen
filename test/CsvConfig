@@ -11,7 +11,6 @@ Presentation:
             John Doe
         Path:
             output_test.pptx
-    
     Template:
         Path:
             test/template.pptx
@@ -30,7 +29,6 @@ Presentation:
     Slides:
         - Title:
             Testing Slide
-
           Charts:
             - Name:
                 ChartTitle
@@ -42,17 +40,10 @@ Presentation:
                 TestData
               Location:
                 1
-              Measure:
-                measure_0
-              Dimension:
-                cat_1
-              # SecondaryDimension:
-              #   cat_0
-              SecondaryMeasure:
-                measure_1
-                
+              Args:
+                {"measure": 'measure_0', "dimension":"cat_1", "second_measure":"measure_1"}
+  
               Filters:
-
               -  AND:
                   - Column: cat_1
                     Type: '!='
@@ -72,7 +63,7 @@ Presentation:
               Type:
                 custom
               Size:
-                (8,6)
+                (2,1)
               DataNameRef:
                 CardTestData
               Location:
@@ -80,7 +71,6 @@ Presentation:
               Args:
                 {"chartType": 'card', "kpi":"test", "kpi_title": "Title", "kpi_value":"Value", "kpi_delta": "Delta", "kpi_text":"Text", "delta_color":"Color" }
                 
-            
 
           Layout:
             ChartCenter 
@@ -91,41 +81,14 @@ Presentation:
             - Name:
                 ChartTitle
               Type:
-                image
+                custom
               Size:
                 (5,5)
-              ImagePath:
-                ./image_path.png
+              Args:
+                {"chartType":"image", "image_path":'./image_path.png'}
               Location:
                 1     
           Layout:
             ChartLeft-TextRight
             
-        - Title:
-            table testing
-  
-          Charts:
-            - Name:
-                ChartTitle
-              Subtitle:
-                ChartTitle
-              Type:
-                table
-              Size:
-                (5,5)
-                   
-              DataNameRef:
-                TestData
-              Location:
-                1
-              Measure:
-                measure_0
-              Dimension:
-                cat_1
-              # Filters:
-              Location:
-                1
-            
-
-          Layout:
-            ChartLeft-TextRight
+ 

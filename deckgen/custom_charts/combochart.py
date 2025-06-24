@@ -8,10 +8,10 @@ class combochart:
         self.data = None
         return
     
-    def add_data(self, df):
-        self.data = df
+    def add_data(self, data):
+        self.data = data
 
-    def prep_data(self, **kwargs):    
+    def prep_args(self, **kwargs):    
         self.XAxis = kwargs['XAxis']
         self.labelFilter = kwargs['labelIndicator']
         self.label = kwargs['label']

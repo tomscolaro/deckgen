@@ -9,11 +9,11 @@ class doublecluster:
         self.data = None
         return
     
-    def add_data(self, df):
-        self.data = df
+    def add_data(self, data):
+        self.data = data
         return
 
-    def prep_data(self,  **kwargs):    
+    def prep_args(self,  **kwargs):    
         # self.data = ''
         self.XAxis = kwargs['XAxis']
         self.labelFilter = kwargs['labelIndicator']

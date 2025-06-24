@@ -16,11 +16,11 @@ class card:
 
         return
     
-    def add_data(self, df):
-        self.data = df
+    def add_data(self, data):
+        self.data = data
         return 
     
-    def prep_data(self, **kwargs):
+    def prep_args(self, **kwargs):
         print(self.data)
         self.data = self.data[self.data['KPI'] == kwargs['kpi']]
         self.kpi_title = self.data[kwargs['kpi_title']].values[0]
@@ -32,7 +32,7 @@ class card:
     
         return 
     
-    def plot(self, size=(1,1)):
+    def plot(self, size=(4,2)):
         # Plot setup
         fig, ax = plt.subplots(figsize=size)
         fig.patch.set_facecolor('white')
@@ -51,13 +51,13 @@ class card:
         # plt.tight_layout()
         # plt.show()
         with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as tmpfile:    
-                # plt.title(f'{self.chartType.capitalize()} plot of {measure} by {dimension}')
-                plt.tight_layout(pad=3.0)
-                plt.savefig(tmpfile.name)
-                plt.close()
+            # plt.title(f'{self.chartType.capitalize()} plot of {measure} by {dimension}')
+            plt.tight_layout(pad=3.0)
+            plt.savefig(tmpfile.name)
+            plt.close()
 
 
-        img_path = tmpfile.name
+            img_path = tmpfile.name
 
 
         return img_path

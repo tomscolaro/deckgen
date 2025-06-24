@@ -12,6 +12,8 @@ class DataGenerator:
         self.filters = {}
 
     def get_data(self, slide, chart, dataName='Data'):
+        if dataName == -1:
+            return 
         data  = self.data[dataName]      
         query_str = self._generate_query_str(slide, chart)
         
@@ -85,7 +87,8 @@ class DataGenerator:
 class CsvDataGenerator(DataGenerator):
     def __init__(self, data_config ):
         super().__init__()
-
+        print("Reading in your CSV file. Hang Tight.")
+        print("Processing DataFrame.. One Moment..")
         self.data = read_csvs_to_dfs(data_config)
 
 
