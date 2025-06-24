@@ -4,18 +4,16 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from charts.default import DefaultChart
 
-
-
-class doublecluster(DefaultChart):
+class doubleCluster(DefaultChart):
     def __init__(self, **kwargs):
         super().__init__()
 
     def prep_args(self,  **kwargs):    
         # self.data = ''
         self.XAxis = kwargs['XAxis']
-        self.labelFilter = kwargs['labelIndicator']
-        self.label = kwargs['label']
-        self.val = kwargs['value']
+        self.dimension_filter_str = kwargs['dimension_filter_value']
+        self.dimension = kwargs['dimension']
+        self.val = kwargs['measure']
 
         self.size = kwargs['size']
         return 
@@ -28,13 +26,13 @@ class doublecluster(DefaultChart):
         bar_width = 0.35
 
         # Separate condition types
-        false_data = self.data[~self.data[self.labelFilter]]
-        true_data = self.data[self.data[self.labelFilter]]
+        false_data = self.data[~self.data[self.dimension] == self.dimension_filter_str]
+        true_data = self.data[self.data[self.dimension] == self.dimension_filter_str]
 
         # Pivot table for stacked bars
         stacked_pivot = false_data.pivot_table(
             index=self.XAxis,
-            columns=self.label,
+            columns=self.dimension,
             values=self.val,
             aggfunc='sum',
             fill_value=0

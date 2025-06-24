@@ -8,7 +8,6 @@ class combochart(DefaultChart):
     def __init__(self, **kwargs):
         super().__init__()
     
-
     def prep_args(self, **kwargs):    
         self.XAxis = kwargs['XAxis']
         self.bar_cols = kwargs['bar_measure']
