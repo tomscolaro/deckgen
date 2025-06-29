@@ -15,5 +15,5 @@ class image:
         self.size = kwargs['size']
         return 
     
-    def plot(self):
+    def plot(self, **kwargs): 
         return self.image_path

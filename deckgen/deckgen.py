@@ -2,6 +2,8 @@ import pandas as pd
 from pptx import Presentation
 from utils import ConfigController, find_layout_by_name, read_csvs_to_dfs
 from chart_handler import ChartHandler
+from pptx.util import Inches
+
 
 class deckGen:
     def __init__(self, mode, config, df=None):
@@ -76,9 +78,17 @@ class Slide:
             idx = len(slide.placeholders) - chartConfig["Location"] +2
             for _, placeholder in enumerate(slide.placeholders):
                 if idx == placeholder.shape_id:
-                    chartController.insertChart(placeholder)
-        
+                    
+                    if chartConfig.get('Args', None).get('chartType', None) == 'excel':
+                        chartController.getExcel(slide, placeholder)      
+                    else:
+                        chartController.insertChart(placeholder)
+
         return 
+    
+    
+        
+
 
 if __name__ == "__main__":
     # print('Handling Test Config')

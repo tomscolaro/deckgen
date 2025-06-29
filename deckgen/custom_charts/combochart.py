@@ -18,7 +18,7 @@ class combochart(DefaultChart):
         self.valSelector = kwargs.get('valSelector', 'valSelector')
         return 
     
-    def plot(self):
+    def plot(self, **kwargs): 
         # Pivot for bar plot
         bar_data = self.data.melt(self.data, id_vars=[self.XAxis], value_vars=[self.bar_cols],   var_name=self.measureLabel, value_name=self.valSelector)
 

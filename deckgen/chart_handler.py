@@ -23,12 +23,12 @@ class ChartHandler:
 
 
     def insertChart(self, placeholder):
-       
+
         if self.chartType == "custom":
             customChartObj = custom[self.args['chartType']]()
             customChartObj.add_data(data=self.data)
             customChartObj.prep_args(size=self.size,  **self.args)
-            img_path = customChartObj.plot()
+            img_path = customChartObj.plot(placeholder=placeholder)
 
         else:
             chartObj = charts[self.chartType]()
@@ -40,6 +40,12 @@ class ChartHandler:
         placeholder.insert_picture(img_path)
         return
    
+    def getExcel(self, slide, placeholder):
+        customChartObj = custom[self.args['chartType']]()
+        customChartObj.add_data(data=self.data)
+        customChartObj.prep_args(size=self.size,  **self.args)
+        out = customChartObj.plot(slide=slide, placeholder=placeholder)
+        return 
 
 if __name__ == '__main__':    
     print(custom)

@@ -18,7 +18,7 @@ class doubleCluster(DefaultChart):
         self.size = kwargs['size']
         return 
     
-    def plot(self):
+    def plot(self, **kwargs): 
         
         # Define time periods
         all_dates = sorted(self.data[self.XAxis].unique())

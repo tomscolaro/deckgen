@@ -49,7 +49,7 @@ class BarPlot(DefaultChart):
     def __init__(self, **kwargs):
         super().__init__()
 
-    def plot(self):
+    def plot(self, **kwargs):
         sns.barplot(x=self.dimension, y=self.measure, data=self.data, palette=self.palette, ax=self.ax)
 
         if self.second_measure:
@@ -62,7 +62,7 @@ class Table(DefaultChart):
     def __init__(self, **kwargs):
         super().__init__()
 
-    def plot(self):
+    def plot(self, **kwargs):
             # sns.pairplot(data, palette=self.palette)
         self.data = pl.from_pandas(self.data).sort(self.measure, descending=True).head(10)
         gt_tbl = GT(self.data).tab_header(
@@ -79,7 +79,7 @@ class LinePlot(DefaultChart):
     def __init__(self, **kwargs):
         super().__init__()
 
-    def plot(self):
+    def plot(self, **kwargs):
         #include double axis logic
         sns.lineplot(x=self.dimension, y=self.measure, data=self.data, palette=self.palette, ax=self.ax)
         if self.second_measure:
@@ -94,7 +94,7 @@ class ScatterPlot(DefaultChart):
     def __init__(self, **kwargs):
         super().__init__()
 
-    def plot(self):
+    def plot(self, **kwargs):
 
          
         sns.scatterplot(x=self.dimension, y=self.measure, data=self.data, palette=self.palette, ax=self.ax)
@@ -109,7 +109,7 @@ class BoxPlot(DefaultChart):
     def __init__(self, **kwargs):
         super().__init__()
 
-    def plot(self):
+    def plot(self, **kwargs):
         sns.boxplot(x=self.dimension, y=self.measure, data=self.data, palette=self.palette, ax=self.ax)        
         if self.second_measure:
             self.plot_second_axis()
@@ -122,7 +122,7 @@ class ViolinPlot(DefaultChart):
     def __init__(self, **kwargs):
         super().__init__()
 
-    def plot(self):
+    def plot(self, **kwargs):
         sns.violinplot(x=self.dimension, y=self.measure, data=self.data, palette=self.palette, ax=self.ax)
     
         image_path = self.save_file()
@@ -134,7 +134,7 @@ class HistPlot(DefaultChart):
     def __init__(self, **kwargs):
         super().__init__()
 
-    def plot(self):
+    def plot(self, **kwargs):
    
         sns.histplot(data=self.data, x=self.measure, hue=self.dimension, multiple="stack", palette=self.palette, ax=self.ax)
         if self.second_measure:
@@ -148,7 +148,7 @@ class StripPlot(DefaultChart):
     def __init__(self, **kwargs):
         super().__init__()
 
-    def plot(self):   
+    def plot(self, **kwargs):   
         sns.stripplot(x=self.dimension, y=self.measure, data=self.data, palette=self.palette, ax=self.ax) 
         image_path = self.save_file()
         return image_path
@@ -158,7 +158,7 @@ class SwarmPlot(DefaultChart):
     def __init__(self, **kwargs):
         super().__init__()
 
-    def plot(self): 
+    def plot(self, **kwargs): 
         sns.swarmplot(x=self.dimension, y=self.measure, data=self.data, palette=self.palette, ax=self.ax)
         image_path = self.save_file()
 
@@ -169,7 +169,7 @@ class KdePlot(DefaultChart):
     def __init__(self, **kwargs):
         super().__init__()
 
-    def plot(self):
+    def plot(self, **kwargs):
         sns.kdeplot(data=self.data, x=self.measure, hue=self.dimension, fill=True, palette=self.palette, ax=self.ax) 
         image_path = self.save_file()
         return image_path
@@ -179,7 +179,7 @@ class CountPlot(DefaultChart):
     def __init__(self, **kwargs):
         super().__init__()
 
-    def plot(self): 
+    def plot(self, **kwargs): 
         sns.countplot(x=self.dimension, data=self.data, palette=self.palette, ax=self.ax)
     
         if self.second_measure:
@@ -194,7 +194,7 @@ class LmPlot(DefaultChart):
     def __init__(self, **kwargs):
         super().__init__()
 
-    def plot(self):
+    def plot(self, **kwargs):
 
         sns.lmplot(x=self.dimension, y=self.measure, data=self.data, palette=self.palette, ax=self.ax)
         if self.second_measure:
@@ -207,12 +207,11 @@ class PairPlot(DefaultChart):
     def __init__(self, **kwargs):
         super().__init__()
 
-    def plot(self): 
+    def plot(self, **kwargs): 
         sns.pairplot(self.data, palette=self.palette, ax=self.ax)
         image_path = self.save_file()
         return image_path
     
-
 
 charts = {
     "table":Table,
@@ -222,8 +221,8 @@ charts = {
     "scatter":ScatterPlot,
     "box":BoxPlot,
     "count":CountPlot,
-    "pairplot":PairPlot
-
+    "pairplot":PairPlot,
+  
 }
 
 

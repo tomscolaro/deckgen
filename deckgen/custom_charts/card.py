@@ -19,7 +19,7 @@ class card(DefaultChart):
         self.delta_color = self.data[kwargs['delta_color']].values[0]
         return 
     
-    def plot(self, size=(4,2)):
+    def plot(self, size=(4,2), **kwargs):
         # Plot setup
         fig, ax = plt.subplots(figsize=size)
         fig.patch.set_facecolor('white')
