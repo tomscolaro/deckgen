@@ -71,17 +71,18 @@ class doubleCluster(DefaultChart):
             x_total,
             true_totals.tolist(),
             width=bar_width,
-            label='Total (True)',
+            label='Total Target',
             color=sns.color_palette("grey")[3]
         )
         # Final formatting
-        ax.set_xticks(x)
+        ax.set_xticks(x,)
         ax.set_xticklabels(all_dates)
+        ax.tick_params(axis='x', labelrotation=45) 
         ax.set_ylabel('Value')
         ax.set_title('Clustered Column Chart: Stacked + Total Bars')
 
         # Move legend to the bottom
-        ax.legend(loc='lower center', bbox_to_anchor=(0.5, -0.15), fontsize='x-small',ncol=4, frameon=False)
+        ax.legend(loc='lower center', bbox_to_anchor=(0.5, -0.5), fontsize='x-small',ncol=4, frameon=False)
 
         img_path = self.save_file()
 
