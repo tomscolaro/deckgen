@@ -45,7 +45,7 @@ class ExcelPlot(DefaultChart):
                 cell = table.cell(row_idx + 1, col_idx)
                 cell.text = str(value)
 
-                for para in cell.paragraphs:
+                for para in cell.text_frame.paragraphs:
                     for run in para.runs:
                         run.font.size =   Pt(10)
 
