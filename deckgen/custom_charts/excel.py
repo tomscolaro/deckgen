@@ -41,7 +41,7 @@ class ExcelPlot(DefaultChart):
             cell.text = str(col_name)
             for para in cell.text_frame.paragraphs:
                     for run in para.runs:
-                        run.font.size =   Pt(8)
+                        run.font.size =   Pt(7)
 
         # Write data rows
         for row_idx, row in self.data.iterrows():
@@ -51,7 +51,7 @@ class ExcelPlot(DefaultChart):
 
                 for para in cell.text_frame.paragraphs:
                     for run in para.runs:
-                        run.font.size =   Pt(8)
+                        run.font.size =   Pt(7)
 
 
         # pl.remove()
