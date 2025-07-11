@@ -23,8 +23,8 @@ class ExcelPlot(DefaultChart):
     def plot(self, **kwargs): 
         sl = kwargs['slide']
         pl = kwargs['placeholder']
-        left = pl.left - Inches(.05)
-        top = pl.top - Inches(.05)
+        left = pl.left - Inches(.1)
+        top = pl.top - Inches(.1)
         width = pl.width + Inches(.1)
         height = pl.height
 
@@ -41,7 +41,7 @@ class ExcelPlot(DefaultChart):
             cell.text = str(col_name)
             for para in cell.text_frame.paragraphs:
                     for run in para.runs:
-                        run.font.size =   Pt(10)
+                        run.font.size =   Pt(8)
 
         # Write data rows
         for row_idx, row in self.data.iterrows():
@@ -51,7 +51,7 @@ class ExcelPlot(DefaultChart):
 
                 for para in cell.text_frame.paragraphs:
                     for run in para.runs:
-                        run.font.size =   Pt(10)
+                        run.font.size =   Pt(8)
 
 
         # pl.remove()
