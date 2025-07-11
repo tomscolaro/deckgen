@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from charts.default import DefaultChart
-from pptx.util import Inches
+from pptx.util import Inches, Pt
 from pptx.dml.color import RGBColor
 import matplotlib.colors as mcolors
 
@@ -43,6 +43,7 @@ class ExcelPlot(DefaultChart):
         for row_idx, row in self.data.iterrows():
             for col_idx, value in enumerate(row):
                 table.cell(row_idx + 1, col_idx).text = str(value)
+                table.cell(row_idx + 1, col_idx).text.font.size = Pt(10)
 
 
         # pl.remove()
