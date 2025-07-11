@@ -37,7 +37,11 @@ class ExcelPlot(DefaultChart):
 
         # Write column headers
         for col_idx, col_name in enumerate(self.data.columns):
-            table.cell(0, col_idx).text = str(col_name)
+            cell = table.cell(0, col_idx)
+            cell.text = str(col_name)
+            for para in cell.text_frame.paragraphs:
+                    for run in para.runs:
+                        run.font.size =   Pt(10)
 
         # Write data rows
         for row_idx, row in self.data.iterrows():
