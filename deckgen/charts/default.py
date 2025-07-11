@@ -33,8 +33,8 @@ class DefaultChart:
         with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as tmpfile:   
             if self.chartType:
                 plt.title(f'{self.chartType.capitalize()} plot of {self.measure} by {self.dimension}')
-            plt.tight_layout(pad=3.0)
-            plt.savefig(tmpfile.name)
+            # plt.tight_layout(pad=3.0)
+            plt.savefig(tmpfile.name, bbox_inches='tight')
             plt.close()
             image_path = tmpfile.name
         return image_path
