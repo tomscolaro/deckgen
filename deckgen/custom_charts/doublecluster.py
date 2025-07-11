@@ -26,7 +26,7 @@ class doubleCluster(DefaultChart):
         bar_width = 0.35
 
         # Separate condition types
-        false_data = self.data[~self.data[self.dimension] == self.dimension_filter_str]
+        false_data = self.data[self.data[self.dimension] != self.dimension_filter_str]
         true_data = self.data[self.data[self.dimension] == self.dimension_filter_str]
 
         # Pivot table for stacked bars
