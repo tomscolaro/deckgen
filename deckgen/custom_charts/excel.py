@@ -42,8 +42,12 @@ class ExcelPlot(DefaultChart):
         # Write data rows
         for row_idx, row in self.data.iterrows():
             for col_idx, value in enumerate(row):
-                table.cell(row_idx + 1, col_idx).text = str(value)
-                table.cell(row_idx + 1, col_idx).text.font.size = Pt(10)
+                cell = table.cell(row_idx + 1, col_idx)
+                cell.text = str(value)
+
+                for para in cell.paragraphs:
+                    for run in para.runs:
+                        run.font.size =   Pt(10)
 
 
         # pl.remove()
