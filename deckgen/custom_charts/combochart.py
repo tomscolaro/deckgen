@@ -20,7 +20,7 @@ class combochart(DefaultChart):
     
     def plot(self, **kwargs): 
         # Pivot for bar plot
-        bar_data = pd.melt(self.data, id_vars=[self.XAxis], value_vars=[self.bar_cols],  var_name=self.measureLabel ) #, value_name=self.valSelector)
+        bar_data = pd.melt(self.data, id_vars=[self.XAxis], value_vars=[self.bar_cols],  var_name=self.measureLabel , value_name=self.valSelector)
 
         # Set figure and axis
         fig, ax1 = plt.subplots(figsize=self.size)
