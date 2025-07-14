@@ -81,8 +81,9 @@ class doubleCluster(DefaultChart):
         ax.set_xticks(x,)
         ax.set_xticklabels(all_dates, fontsize=4)
         ax.tick_params(axis='x', labelrotation=45, size=4) 
-        ax.tick_params(axis='y', size=4) 
+       
         ax.set_ylabel('Value', fontsize=4)
+        ax.tick_params(axis='y', size=4) 
         ax.set_yticklabels(fontsize=4)
         ax.set_title('Clustered Column Chart: Stacked + Total Bars', fontsize=4)
 
