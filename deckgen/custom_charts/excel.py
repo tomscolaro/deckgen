@@ -24,7 +24,7 @@ class ExcelPlot(DefaultChart):
         sl = kwargs['slide']
         pl = kwargs['placeholder']
         left = pl.left - Inches(.15)
-        top = pl.top - Inches(.15)
+        top = pl.top - Inches(.05)
         width = pl.width + Inches(.2)
         height = pl.height
 
