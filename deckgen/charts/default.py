@@ -34,7 +34,7 @@ class DefaultChart:
             if self.chartType:
                 plt.title(f'{self.chartType.capitalize()} plot of {self.measure} by {self.dimension}')
             # plt.tight_layout(pad=3.0)
-            plt.savefig(tmpfile.name, bbox_inches='tight',pad_inches= 0.5)
+            plt.savefig(tmpfile.name, pad_inches=2.0) #bbox_inches='tight',pad_inches= 0.5)
             plt.close()
             image_path = tmpfile.name
         return image_path
@@ -89,7 +89,6 @@ class LinePlot(DefaultChart):
         image_path = self.save_file()
         return image_path
 
-
 class ScatterPlot(DefaultChart):
     def __init__(self, **kwargs):
         super().__init__()
@@ -128,8 +127,6 @@ class ViolinPlot(DefaultChart):
         image_path = self.save_file()
         return image_path
 
-
-
 class HistPlot(DefaultChart):
     def __init__(self, **kwargs):
         super().__init__()
@@ -143,7 +140,6 @@ class HistPlot(DefaultChart):
         image_path = self.save_file()
         return image_path
 
-
 class StripPlot(DefaultChart):
     def __init__(self, **kwargs):
         super().__init__()
@@ -153,7 +149,6 @@ class StripPlot(DefaultChart):
         image_path = self.save_file()
         return image_path
         
-
 class SwarmPlot(DefaultChart):
     def __init__(self, **kwargs):
         super().__init__()
@@ -164,7 +159,6 @@ class SwarmPlot(DefaultChart):
 
         return image_path
 
-
 class KdePlot(DefaultChart):
     def __init__(self, **kwargs):
         super().__init__()
@@ -174,7 +168,6 @@ class KdePlot(DefaultChart):
         image_path = self.save_file()
         return image_path
 
- 
 class CountPlot(DefaultChart):
     def __init__(self, **kwargs):
         super().__init__()
