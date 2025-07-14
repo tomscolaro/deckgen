@@ -68,8 +68,8 @@ class doubleCluster(DefaultChart):
             bottom = [b + v for b, v in zip(bottom, values)]
 
 
-        for c in ax.containers:
-            ax.bar_label(c, fmt='{:,.1f}M'.format, labels=[int(val) / 1000000 for val in c.datavalues])
+        # for c in ax.containers:
+        #     ax.bar_label(c, fmt='{:,.1f}M'.format, labels=[int(val) / 1_000_000 for val in c.datavalues])
         # Plot total bars
 
         ax.bar(
@@ -80,8 +80,8 @@ class doubleCluster(DefaultChart):
             color=sns.color_palette("grey")[3]
         )
         # # Final formatting
-        # for c in ax.containers:
-        #     ax.bar_label(c, fmt='{:,.1f}M'.format, labels=[val / 1000000 for val in c.datavalues])
+        for c in ax.containers:
+            ax.bar_label(c, fmt='{:,.1f}M'.format, labels=[ int(val) / 1000000 for val in c.datavalues])
      
 
         plt.ticklabel_format(style='plain', axis='y')
