@@ -36,6 +36,8 @@ class combochart(DefaultChart):
         ax2 = ax1.twinx()
         sns.lineplot(data=line_data, x=self.XAxis, y=self.line_col, ax=ax2, marker='o', color='black', linewidth=2, label=self.line_col)
 
+        
+
         # Align legends
         ax1.legend(loc='upper left')
         ax2.legend(loc='upper right')
@@ -47,6 +49,5 @@ class combochart(DefaultChart):
 
 
 
-        
-        img_path = self.save_file()
+        img_path = self.save_file((12,2.5))
         return img_path
