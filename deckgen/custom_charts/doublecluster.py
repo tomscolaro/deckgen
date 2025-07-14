@@ -76,9 +76,8 @@ class doubleCluster(DefaultChart):
             color=sns.color_palette("grey")[3]
         )
         # Final formatting
-        for container in ax.containers:
-            ax.bar_label(container/1_000_000, fmt='%.0f')  # Customize format as needed
-
+        for c in ax.containers:
+            ax.bar_label(c, fmt='{:,.1f}M'.format, labels=[val / 1000000 for val in c.datavalues])
         # sns.set(font_scale=.8) # Increases all font sizes by 20%
         # Prevent scientific notation on the y-axis
         plt.ticklabel_format(style='plain', axis='y')
