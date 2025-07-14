@@ -36,7 +36,7 @@ class DefaultChart:
             # plt.tight_layout(pad=3.0)
             if size:
                 plt.gcf().set_size_inches(size[0], size[1])
-            plt.savefig(tmpfile.name, dpi=400, bbox_inches='tight', pad_inches=1.5)
+            plt.savefig(tmpfile.name, dpi=400, bbox_inches='tight', pad_inches=1)
             plt.close()
             image_path = tmpfile.name
         return image_path
