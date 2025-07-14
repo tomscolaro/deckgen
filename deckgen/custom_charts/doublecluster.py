@@ -88,7 +88,7 @@ class doubleCluster(DefaultChart):
         ax.set_title('Clustered Column Chart: Stacked + Total Bars', fontsize=4)
 
         # Move legend to the bottom
-        # ax.legend(loc='lower center', fontsize='xx-small',ncol=4, frameon=False)
+        ax.legend(loc='lower center', fontsize='xx-small',ncol=4, frameon=False)
 
         img_path = self.save_file()
 
