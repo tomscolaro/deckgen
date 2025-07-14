@@ -88,18 +88,18 @@ class doubleCluster(DefaultChart):
         # Apply the formatter to the y-axis
         plt.gca().yaxis.set_major_formatter(FuncFormatter(mm_formatter))
 
-        plt.rcParams["ytick.labelsize"] = 8
+        plt.rcParams["ytick.labelsize"] = 12
         ax.set_xticks(x,)
-        ax.set_xticklabels(all_dates, fontsize=8)
-        ax.tick_params(axis='x', labelrotation=45, size=8) 
+        ax.set_xticklabels(all_dates, fontsize=12)
+        ax.tick_params(axis='x', labelrotation=45, size=12) 
        
-        ax.set_ylabel(self.val + " mm", fontsize=8)
+        ax.set_ylabel(self.val + " in Millions", fontsize=12)
         # ax.tick_params(axis='y', size=4) 
         # ax.set_yticklabels(fontsize=4)
         ax.set_title(self.title, fontsize=16)
 
         # Move legend to the bottom
-        ax.legend(loc='lower center',  bbox_to_anchor=(0.5, -.5), fontsize='xx-small',ncol=4, frameon=False)
+        ax.legend(loc='lower center',  bbox_to_anchor=(0.5, -.5), fontsize='x-small',ncol=4, frameon=False)
 
         img_path = self.save_file((12,2.5))
         return img_path
