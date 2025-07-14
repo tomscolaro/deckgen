@@ -76,12 +76,12 @@ class doubleCluster(DefaultChart):
         )
         # Final formatting
 
-        sns.set(font_scale=.8) # Increases all font sizes by 20%
+        # sns.set(font_scale=.8) # Increases all font sizes by 20%
 
         ax.set_xticks(x,)
-        ax.set_xticklabels(all_dates)
+        ax.set_xticklabels(all_dates, fontsize=8)
         ax.tick_params(axis='x', labelrotation=45, size=4) 
-        ax.set_ylabel('Value')
+        ax.set_ylabel('Value', fontsize=8)
         ax.set_title('Clustered Column Chart: Stacked + Total Bars')
 
         # Move legend to the bottom
