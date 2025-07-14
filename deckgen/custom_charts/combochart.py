@@ -20,7 +20,6 @@ class combochart(DefaultChart):
     
     def plot(self, **kwargs): 
         # Pivot for bar plot
-        print(self.data.head(10))
         bar_data = self.data.melt(id_vars=[self.XAxis], value_vars=self.bar_cols,  var_name=self.measureLabel)
 
         # Set figure and axis
@@ -36,15 +35,16 @@ class combochart(DefaultChart):
         ax2 = ax1.twinx()
         sns.lineplot(data=line_data, x=self.XAxis, y=self.line_col, ax=ax2, marker='o', color='black', linewidth=2, label=self.line_col)
 
-        
+        ax1.tick_params(axis='x', labelrotation=45, size=10) 
 
         # Align legends
         ax1.legend(loc='upper left')
         ax2.legend(loc='upper right')
 
         # Labels and title
-        ax1.set_ylabel("Bar Value")
-        ax2.set_ylabel("Line Value")
+        ax1.set_ylabel(" bar value", fontsize=10)
+        
+        ax2.set_ylabel(" value value", fontsize=10)
         plt.title("Combo Chart: Clustered Bars + Line")
 
 
