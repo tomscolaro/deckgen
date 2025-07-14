@@ -49,5 +49,5 @@ class combochart(DefaultChart):
 
 
 
-        img_path = self.save_file((12,2.5))
+        img_path = self.save_file((8,2.5))
         return img_path
