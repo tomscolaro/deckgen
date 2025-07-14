@@ -21,7 +21,7 @@ class combochart(DefaultChart):
     def plot(self, **kwargs): 
         # Pivot for bar plot
         print(self.data.head(10))
-        bar_data = self.data.melt(id_vars=[self.XAxis], value_vars=[self.bar_cols],  var_name=self.measureLabel , value_name=self.valSelector)
+        bar_data = self.data.melt(id_vars=[self.XAxis], value_vars=[self.bar_cols],  var_name=self.measureLabel)
 
         # Set figure and axis
         fig, ax1 = plt.subplots(figsize=self.size)
