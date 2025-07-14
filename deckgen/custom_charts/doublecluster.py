@@ -76,6 +76,8 @@ class doubleCluster(DefaultChart):
             color=sns.color_palette("grey")[3]
         )
         # Final formatting
+        for container in ax.containers:
+            ax.bar_label(container, fmt='%.2f')  # Customize format as needed
 
         # sns.set(font_scale=.8) # Increases all font sizes by 20%
         # Prevent scientific notation on the y-axis
@@ -93,7 +95,7 @@ class doubleCluster(DefaultChart):
         ax.set_xticklabels(all_dates, fontsize=10)
         ax.tick_params(axis='x', labelrotation=45, size=10) 
        
-        ax.set_ylabel(self.val + "(Millions)", fontsize=10)
+        ax.set_ylabel(self.val + " (Millions)", fontsize=10)
         # ax.tick_params(axis='y', size=4) 
         # ax.set_yticklabels(fontsize=4)
         ax.set_title(self.title, fontsize=16)
