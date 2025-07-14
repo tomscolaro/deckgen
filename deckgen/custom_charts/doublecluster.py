@@ -77,12 +77,12 @@ class doubleCluster(DefaultChart):
         # Final formatting
 
         # sns.set(font_scale=.8) # Increases all font sizes by 20%
-        plt.rcParams["ytick.labelsize"] = 2
+        plt.rcParams["ytick.labelsize"] = 8
         ax.set_xticks(x,)
-        ax.set_xticklabels(all_dates, fontsize=2)
-        ax.tick_params(axis='x', labelrotation=45, size=2) 
+        ax.set_xticklabels(all_dates, fontsize=8)
+        ax.tick_params(axis='x', labelrotation=45, size=8) 
        
-        ax.set_ylabel('Value', fontsize=2)
+        ax.set_ylabel('Value', fontsize=8)
         # ax.tick_params(axis='y', size=4) 
         # ax.set_yticklabels(fontsize=4)
         ax.set_title('Clustered Column Chart: Stacked + Total Bars', fontsize=4)
