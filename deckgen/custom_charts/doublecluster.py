@@ -83,7 +83,7 @@ class doubleCluster(DefaultChart):
 
         # Define a formatter function to add "mm"
         def mm_formatter(x, pos):
-            return f"{x:.0f} mm" # Format as integer with "mm"
+            return f"{x/ 1_000_000:.0f}mm" # Format as integer with "mm"
 
         # Apply the formatter to the y-axis
         plt.gca().yaxis.set_major_formatter(FuncFormatter(mm_formatter))
