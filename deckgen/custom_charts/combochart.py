@@ -35,6 +35,9 @@ class combochart(DefaultChart):
         ax2 = ax1.twinx()
         sns.lineplot(data=line_data, x=self.XAxis, y=self.line_col, ax=ax2, marker='o', color='black', linewidth=2, label=self.line_col)
 
+
+
+        plt.rcParams["ytick.labelsize"] = 12
         ax1.tick_params(axis='x', labelrotation=45, size=10) 
 
         # Align legends
