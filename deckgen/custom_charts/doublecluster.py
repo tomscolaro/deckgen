@@ -84,7 +84,7 @@ class doubleCluster(DefaultChart):
        
         ax.set_ylabel('Value', fontsize=4)
         ax.tick_params(axis='y', size=4) 
-        ax.set_yticklabels(fontsize=4)
+        # ax.set_yticklabels(fontsize=4)
         ax.set_title('Clustered Column Chart: Stacked + Total Bars', fontsize=4)
 
         # Move legend to the bottom
