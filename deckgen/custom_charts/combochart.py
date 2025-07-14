@@ -27,7 +27,7 @@ class combochart(DefaultChart):
         fig, ax1 = plt.subplots(figsize=self.size)
 
         # Clustered barplot with seaborn
-        sns.barplot(data=bar_data, x=self.XAxis, y=self.measureLabel, hue=self.valSelector, ax=ax1, palette='muted')
+        sns.barplot(data=bar_data, x=self.XAxis, y=self.measureLabel, hue=self.measureLabel, ax=ax1, palette='muted')
 
         # Calculate line values (averages across groups for each category here, you can customize)
         line_data = self.data.groupby(self.XAxis)[self.line_col].sum().reset_index()
