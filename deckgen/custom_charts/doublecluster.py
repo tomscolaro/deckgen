@@ -82,7 +82,7 @@ class doubleCluster(DefaultChart):
         ax.set_xticklabels(all_dates, fontsize=8)
         ax.tick_params(axis='x', labelrotation=45, size=8) 
        
-        ax.set_ylabel(self.val, fontsize=8)
+        ax.set_ylabel(self.val + " mm", fontsize=8)
         # ax.tick_params(axis='y', size=4) 
         # ax.set_yticklabels(fontsize=4)
         ax.set_title(self.title, fontsize=16)
