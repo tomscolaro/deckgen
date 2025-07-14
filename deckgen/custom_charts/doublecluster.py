@@ -14,7 +14,7 @@ class doubleCluster(DefaultChart):
         self.dimension_filter_str = kwargs['dimension_filter_value']
         self.dimension = kwargs['dimension']
         self.val = kwargs['measure']
-
+        self.title = kwargs['Title']
         self.size = kwargs['size']
         return 
     
@@ -82,14 +82,13 @@ class doubleCluster(DefaultChart):
         ax.set_xticklabels(all_dates, fontsize=8)
         ax.tick_params(axis='x', labelrotation=45, size=8) 
        
-        ax.set_ylabel('Value', fontsize=8)
+        ax.set_ylabel(self.val, fontsize=8)
         # ax.tick_params(axis='y', size=4) 
         # ax.set_yticklabels(fontsize=4)
-        ax.set_title('Clustered Column Chart: Stacked + Total Bars', fontsize=16)
+        ax.set_title(self.title, fontsize=16)
 
         # Move legend to the bottom
         ax.legend(loc='lower center',  bbox_to_anchor=(0.5, -.5), fontsize='xx-small',ncol=4, frameon=False)
 
         img_path = self.save_file()
-
         return img_path
