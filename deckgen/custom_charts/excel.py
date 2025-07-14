@@ -26,7 +26,7 @@ class ExcelPlot(DefaultChart):
         left = pl.left - Inches(.15)
         top = pl.top - Inches(.05)
         width = pl.width + Inches(.2)
-        height = pl.height
+        height = pl.height + Inches(.2)
 
         rows = self.data.shape[0]+1
         cols =  self.data.shape[1]
