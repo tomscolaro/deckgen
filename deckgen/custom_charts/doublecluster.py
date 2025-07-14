@@ -79,9 +79,9 @@ class doubleCluster(DefaultChart):
             label='Total Target',
             color=sns.color_palette("grey")[3]
         )
-        # Final formatting
-        for c in ax.containers:
-            ax.bar_label(c, fmt='{:,.1f}M'.format, labels=[val / 1000000 for val in c.datavalues])
+        # # Final formatting
+        # for c in ax.containers:
+        #     ax.bar_label(c, fmt='{:,.1f}M'.format, labels=[val / 1000000 for val in c.datavalues])
      
 
         plt.ticklabel_format(style='plain', axis='y')
