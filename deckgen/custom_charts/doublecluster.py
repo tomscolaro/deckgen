@@ -1,6 +1,7 @@
 
 import pandas as pd
 import matplotlib.pyplot as plt
+from matplotlib.ticker import FuncFormatter
 import seaborn as sns
 from charts.default import DefaultChart
 
@@ -77,6 +78,16 @@ class doubleCluster(DefaultChart):
         # Final formatting
 
         # sns.set(font_scale=.8) # Increases all font sizes by 20%
+        # Prevent scientific notation on the y-axis
+        plt.ticklabel_format(style='plain', axis='y')
+
+        # Define a formatter function to add "mm"
+        def mm_formatter(x, pos):
+            return f"{x:.0f} mm" # Format as integer with "mm"
+
+        # Apply the formatter to the y-axis
+        plt.gca().yaxis.set_major_formatter(FuncFormatter(mm_formatter))
+
         plt.rcParams["ytick.labelsize"] = 8
         ax.set_xticks(x,)
         ax.set_xticklabels(all_dates, fontsize=8)
