@@ -75,6 +75,9 @@ class doubleCluster(DefaultChart):
             color=sns.color_palette("grey")[3]
         )
         # Final formatting
+
+        sns.set(font_scale=.8) # Increases all font sizes by 20%
+
         ax.set_xticks(x,)
         ax.set_xticklabels(all_dates)
         ax.tick_params(axis='x', labelrotation=45, size=4) 
