@@ -42,8 +42,8 @@ class combochart(DefaultChart):
 
         # Align legends
         
-        ax1.legend(loc='lower center',  bbox_to_anchor=(0.25, -.5), fontsize='x-small',ncol=3, frameon=False)
-        ax2.legend(loc='lower right',  bbox_to_anchor=(0.75, -.5), fontsize='x-small',ncol=1, frameon=False)
+        ax1.legend(loc='lower center',  bbox_to_anchor=(0.25, -.6), fontsize='x-small',ncol=3, frameon=False)
+        ax2.legend(loc='lower right',  bbox_to_anchor=(0.75, -.6), fontsize='x-small',ncol=1, frameon=False)
         # Labels and title
         ax1.set_ylabel(" bar value", fontsize=10)
         
