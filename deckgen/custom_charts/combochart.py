@@ -38,9 +38,9 @@ class combochart(DefaultChart):
         ax1.tick_params(axis='x', labelrotation=45, size=10) 
 
         # Align legends
-        ax1.legend(loc='upper left')
-        ax2.legend(loc='upper right')
-
+        
+        ax1.legend(loc='lower center',  bbox_to_anchor=(0.5, -.5), fontsize='x-small',ncol=3, frameon=False)
+        ax2.legend(loc='lower right',  bbox_to_anchor=(0.5, -.5), fontsize='x-small',ncol=1, frameon=False)
         # Labels and title
         ax1.set_ylabel(" bar value", fontsize=10)
         
