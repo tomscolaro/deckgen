@@ -66,10 +66,12 @@ class doubleCluster(DefaultChart):
                 color=category_colors[category]
             )
             bottom = [b + v for b, v in zip(bottom, values)]
-        # Final formatting
+
+
         for c in ax.containers:
             ax.bar_label(c, fmt='{:,.1f}M'.format, labels=[val / 1000000 for val in c.datavalues])
         # Plot total bars
+
         ax.bar(
             x_total,
             true_totals.tolist(),
@@ -80,14 +82,12 @@ class doubleCluster(DefaultChart):
         # Final formatting
         for c in ax.containers:
             ax.bar_label(c, fmt='{:,.1f}M'.format, labels=[val / 1000000 for val in c.datavalues])
-        # sns.set(font_scale=.8) # Increases all font sizes by 20%
-        # Prevent scientific notation on the y-axis
-        plt.ticklabel_format(style='plain', axis='y')
+     
 
+        plt.ticklabel_format(style='plain', axis='y')
         # Define a formatter function to add "mm"
         def mm_formatter(x, pos):
             return f"{x/ 1_000_000:.0f}mm" # Format as integer with "mm"
-
         # Apply the formatter to the y-axis
         plt.gca().yaxis.set_major_formatter(FuncFormatter(mm_formatter))
 
