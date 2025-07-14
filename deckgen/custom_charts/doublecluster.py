@@ -83,10 +83,11 @@ class doubleCluster(DefaultChart):
         ax.tick_params(axis='x', labelrotation=45, size=4) 
         ax.tick_params(axis='y', size=4) 
         ax.set_ylabel('Value', fontsize=4)
+        ax.set_yticklabels(fontsize=4)
         ax.set_title('Clustered Column Chart: Stacked + Total Bars', fontsize=4)
 
         # Move legend to the bottom
-        ax.legend(loc='lower center', bbox_to_anchor=(.5, -1.5), fontsize='x-small',ncol=4, frameon=False)
+        ax.legend(loc='lower center', fontsize='x-small',ncol=4, frameon=False)
 
         img_path = self.save_file()
 
