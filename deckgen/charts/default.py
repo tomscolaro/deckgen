@@ -35,7 +35,7 @@ class DefaultChart:
                 plt.title(f'{self.chartType.capitalize()} plot of {self.measure} by {self.dimension}')
             # plt.tight_layout(pad=3.0)
             plt.gcf().set_size_inches(5, 2)
-            plt.savefig(tmpfile.name, dpi=400, bbox_inches='tight', pad=1.5)
+            plt.savefig(tmpfile.name, dpi=400, bbox_inches='tight', padding=1.5)
             plt.close()
             image_path = tmpfile.name
         return image_path
