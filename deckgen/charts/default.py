@@ -29,12 +29,13 @@ class DefaultChart:
         self.fig, self.ax = plt.subplots(figsize= kwargs['size'])
         return 
     
-    def save_file(self):
+    def save_file(self, size=None):
         with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as tmpfile:   
             if self.chartType:
                 plt.title(f'{self.chartType.capitalize()} plot of {self.measure} by {self.dimension}')
             # plt.tight_layout(pad=3.0)
-            plt.gcf().set_size_inches(8, 2)
+            if size:
+                plt.gcf().set_size_inches(size[0], size[1])
             plt.savefig(tmpfile.name, dpi=400, bbox_inches='tight', pad_inches=1.5)
             plt.close()
             image_path = tmpfile.name

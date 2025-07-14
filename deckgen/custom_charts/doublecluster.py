@@ -90,5 +90,5 @@ class doubleCluster(DefaultChart):
         # Move legend to the bottom
         ax.legend(loc='lower center',  bbox_to_anchor=(0.5, -.5), fontsize='xx-small',ncol=4, frameon=False)
 
-        img_path = self.save_file()
+        img_path = self.save_file((10,4))
         return img_path
