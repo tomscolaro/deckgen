@@ -69,7 +69,7 @@ class doubleCluster(DefaultChart):
 
 
         for c in ax.containers:
-            ax.bar_label(c, fmt='{:,.1f}M'.format, labels=[val / 1000000 for val in c.datavalues])
+            ax.bar_label(c, fmt='{:,.1f}M'.format, labels=[int(val) / 1000000 for val in c.datavalues])
         # Plot total bars
 
         ax.bar(
