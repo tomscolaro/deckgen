@@ -77,7 +77,7 @@ class doubleCluster(DefaultChart):
         )
         # Final formatting
         for container in ax.containers:
-            ax.bar_label(container, fmt='%.2f')  # Customize format as needed
+            ax.bar_label(container/1_000_000, fmt='%.2f')  # Customize format as needed
 
         # sns.set(font_scale=.8) # Increases all font sizes by 20%
         # Prevent scientific notation on the y-axis
