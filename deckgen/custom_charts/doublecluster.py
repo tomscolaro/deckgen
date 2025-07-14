@@ -77,7 +77,7 @@ class doubleCluster(DefaultChart):
         # Final formatting
 
         # sns.set(font_scale=.8) # Increases all font sizes by 20%
-
+        plt.rcParams["ytick.labelsize"] = 8
         ax.set_xticks(x,)
         ax.set_xticklabels(all_dates, fontsize=4)
         ax.tick_params(axis='x', labelrotation=45, size=4) 
