@@ -26,7 +26,7 @@ class doubleCluster(DefaultChart):
         self.x_label_size = kwargs.get('xlabel_size', 8)
         self.bar_label_size = kwargs.get('bar_label_size', 6)
         self.title = kwargs.get('Title', 'Title')
-
+        self.scale = kwargs.get('scale', 1_000_000)
         return 
     
     def plot(self, **kwargs): 
@@ -91,13 +91,13 @@ class doubleCluster(DefaultChart):
         )
         # # Final formatting
         for c in ax.containers:
-            ax.bar_label(c, fmt='{:.2f}M'.format, labels=[ round(val / 1_000_000, 2) for val in c.datavalues], fontsize=self.bar_label_size)
+            ax.bar_label(c, fmt='{:.2f}M'.format, labels=[ round(val / self.scale, 2) for val in c.datavalues], fontsize=self.bar_label_size)
      
 
         plt.ticklabel_format(style='plain', axis='y')
         # Define a formatter function to add "mm"
         def mm_formatter(x, pos):
-            return f"{x/ 1_000_000:.0f}mm" # Format as integer with "mm"
+            return f"{x/ self.scale:.0f}mm" # Format as integer with "mm"
         # Apply the formatter to the y-axis
         plt.gca().yaxis.set_major_formatter(FuncFormatter(mm_formatter))
 
