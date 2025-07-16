@@ -15,8 +15,17 @@ class doubleCluster(DefaultChart):
         self.dimension_filter_str = kwargs['dimension_filter_value']
         self.dimension = kwargs['dimension']
         self.val = kwargs['measure']
-        self.title = kwargs['Title']
+    
         self.size = kwargs['size']
+
+
+        self.color_palette = kwargs.get('palette', 'pastel') 
+        self.y_label = kwargs.get('ylabel', 'ylabel')
+        self.x_label = kwargs.get('xlabel', 'xlabel')
+        self.y_label_size = kwargs.get('ylabel_size', 8)
+        self.x_label_size = kwargs.get('xlabel_size', 8)
+        self.title = kwargs.get('Title', 'Title')
+
         return 
     
     def plot(self, **kwargs): 
@@ -46,7 +55,7 @@ class doubleCluster(DefaultChart):
         fig, ax = plt.subplots(figsize=self.size)
 
         # Get colors from seaborn palette
-        palette = sns.color_palette("pastel", n_colors=len(stacked_pivot.columns))
+        palette = sns.color_palette(self.color_palette, n_colors=len(stacked_pivot.columns))
         category_colors = dict(zip(stacked_pivot.columns, palette))
 
         # X positions
@@ -81,7 +90,7 @@ class doubleCluster(DefaultChart):
         )
         # # Final formatting
         for c in ax.containers:
-            ax.bar_label(c, fmt='{:.1f}M'.format, labels=[ int(val) / 1000000 for val in c.datavalues])
+            ax.bar_label(c, fmt='{:.1f}M'.format, labels=[ int(val) / 1000000 for val in c.datavalues], fontsize=10)
      
 
         plt.ticklabel_format(style='plain', axis='y')
@@ -91,12 +100,12 @@ class doubleCluster(DefaultChart):
         # Apply the formatter to the y-axis
         plt.gca().yaxis.set_major_formatter(FuncFormatter(mm_formatter))
 
-        plt.rcParams["ytick.labelsize"] = 12
+        plt.rcParams["ytick.labelsize"] = self.y_label_size
         ax.set_xticks(x,)
-        ax.set_xticklabels(all_dates, fontsize=10)
-        ax.tick_params(axis='x', labelrotation=45, size=10) 
+        ax.set_xticklabels(all_dates, fontsize=self.x_label_size)
+        ax.tick_params(axis='x', labelrotation=45, size=self.x_label_size) 
        
-        ax.set_ylabel(self.val + " (Millions)", fontsize=10)
+        ax.set_ylabel(self.y_label, fontsize=self.y_label_size)
         # ax.tick_params(axis='y', size=4) 
         # ax.set_yticklabels(fontsize=4)
         ax.set_title(self.title, fontsize=16)
