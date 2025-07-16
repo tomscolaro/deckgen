@@ -91,7 +91,7 @@ class doubleCluster(DefaultChart):
         )
         # # Final formatting
         for c in ax.containers:
-            ax.bar_label(c, fmt='{:.1f}M'.format, labels=[ (val) / 1000000 for val in c.datavalues], fontsize=self.bar_label_size)
+            ax.bar_label(c, fmt='{:.1f}M'.format, labels=[ float(val / 1_000_000) for val in c.datavalues], fontsize=self.bar_label_size)
      
 
         plt.ticklabel_format(style='plain', axis='y')

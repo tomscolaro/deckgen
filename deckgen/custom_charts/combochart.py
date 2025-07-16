@@ -16,6 +16,17 @@ class combochart(DefaultChart):
         self.size = kwargs['size']
         self.measureLabel = kwargs.get('measureLabel', 'measure')
         self.valSelector = kwargs.get('valSelector', 'valSelector')
+
+
+        
+        self.color_palette = kwargs.get('palette', 'pastel') 
+        self.y_label = kwargs.get('ylabel', 'ylabel')
+        self.x_label = kwargs.get('xlabel', 'xlabel')
+        self.y_label_size = kwargs.get('ylabel_size', 8)
+        self.x_label_size = kwargs.get('xlabel_size', 8)
+        self.bar_label_size = kwargs.get('bar_label_size', 8)
+        self.title = kwargs.get('Title', 'Title')
+
         return 
     
     def plot(self, **kwargs): 
