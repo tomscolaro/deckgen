@@ -71,7 +71,7 @@ class doubleCluster(DefaultChart):
             color=sns.color_palette("grey")[3]
         )
         for c in ax.containers:
-            ax.bar_label(c, fmt='{:,.1f}M'.format, labels=[int(val) / 1_000_000 for val in c.datavalues])
+            ax.bar_label(c, fmt='{:,.1f}M'.format, labels=[ round(val / self.scale, 2) for val in c.datavalues], fontsize=self.bar_label_size)
 
         # Plot stacked bars
         bottom = [0] * len(all_dates)
@@ -86,7 +86,7 @@ class doubleCluster(DefaultChart):
                 color=category_colors[category]
             )
             bottom = [b + v for b, v in zip(bottom, values)]
-            ax.bar_label(p, fmt='{:,.1f}M'.format, labels=[int(val) / 1_000_000 for val in p.datavalues])
+            ax.bar_label(p, fmt='{:,.1f}M'.format, labels=[ round(val / self.scale, 2) for val in c.datavalues], fontsize=self.bar_label_size)
 
 
         # for c in ax.containers:
