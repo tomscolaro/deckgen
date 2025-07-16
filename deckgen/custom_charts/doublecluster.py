@@ -63,11 +63,21 @@ class doubleCluster(DefaultChart):
         x_stacked = [i - bar_width/2 for i in x]
         x_total = [i + bar_width/2 for i in x]
 
+        ax.bar(
+            x_total,
+            true_totals.tolist(),
+            width=bar_width,
+            label='Total Target',
+            color=sns.color_palette("grey")[3]
+        )
+        for c in ax.containers:
+            ax.bar_label(c, fmt='{:,.1f}M'.format, labels=[int(val) / 1_000_000 for val in c.datavalues])
+
         # Plot stacked bars
         bottom = [0] * len(all_dates)
         for category in stacked_pivot.columns:
             values = stacked_pivot[category].tolist()
-            ax.bar(
+            p = ax.bar(
                 x_stacked,
                 values,
                 bottom=bottom,
@@ -76,22 +86,17 @@ class doubleCluster(DefaultChart):
                 color=category_colors[category]
             )
             bottom = [b + v for b, v in zip(bottom, values)]
+            p.bar_label(p, fmt='{:,.1f}M'.format, labels=[int(val) / 1_000_000 for val in p.datavalues])
 
 
         # for c in ax.containers:
         #     ax.bar_label(c, fmt='{:,.1f}M'.format, labels=[int(val) / 1_000_000 for val in c.datavalues])
         # Plot total bars
 
-        ax.bar(
-            x_total,
-            true_totals.tolist(),
-            width=bar_width,
-            label='Total Target',
-            color=sns.color_palette("grey")[3]
-        )
+
         # # Final formatting
-        for c in ax.containers:
-            ax.bar_label(c, fmt='{:.2f}M'.format, labels=[ round(val / self.scale, 2) for val in c.datavalues], fontsize=self.bar_label_size)
+        # for c in ax.containers:
+        #     ax.bar_label(c, fmt='{:.2f}M'.format, labels=[ round(val / self.scale, 2) for val in c.datavalues], fontsize=self.bar_label_size)
      
 
         plt.ticklabel_format(style='plain', axis='y')
