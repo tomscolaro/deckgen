@@ -86,7 +86,7 @@ class doubleCluster(DefaultChart):
                 color=category_colors[category]
             )
             bottom = [b + v for b, v in zip(bottom, values)]
-            p.bar_label(p, fmt='{:,.1f}M')
+            ax.bar_label(p, fmt='{:,.1f}M'.format, labels=[int(val) / 1_000_000 for val in p.datavalues])
 
 
         # for c in ax.containers:
