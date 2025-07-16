@@ -29,7 +29,8 @@ class combochart(DefaultChart):
         self.bar_label_size = kwargs.get('bar_label_size', 8)
         self.title = kwargs.get('Title', 'Title')
         self.line_color = kwargs.get('line_color', 'black')
-        self.legend_x = kwargs.get('legendX', .35)
+        self.legend_x1 = kwargs.get('legendX1', .35)
+        self.legend_x2 = kwargs.get('legendX2', .35)
 
         return 
     
@@ -58,8 +59,8 @@ class combochart(DefaultChart):
         # Align legends
         ax1.set_xlabel(self.x_label,fontsize=self.x_label_size)
         
-        ax1.legend(loc='lower center',  bbox_to_anchor=(self.legend_x, -.6), fontsize='x-small',ncol=3, frameon=False)
-        ax2.legend(loc='lower right',  bbox_to_anchor=(self.legend_x+.35, -.6), fontsize='x-small',ncol=1, frameon=False)
+        ax1.legend(loc='lower center',  bbox_to_anchor=(self.legend_x1, -.6), fontsize='x-small',ncol=3, frameon=False)
+        ax2.legend(loc='lower right',  bbox_to_anchor=(self.legend_x2, -.6), fontsize='x-small',ncol=1, frameon=False)
         # Labels and title
         ax1.set_ylabel(self.y1_label, fontsize=self.y1_label_size)
         
