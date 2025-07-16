@@ -20,9 +20,11 @@ class combochart(DefaultChart):
 
         
         self.color_palette = kwargs.get('palette', 'pastel') 
-        self.y_label = kwargs.get('ylabel', 'ylabel')
+        self.y1_label = kwargs.get('ylabel1', 'ylabel1')
+        self.y2_label = kwargs.get('ylabel2', 'ylabel2')
         self.x_label = kwargs.get('xlabel', 'xlabel')
-        self.y_label_size = kwargs.get('ylabel_size', 8)
+        self.y1_label_size = kwargs.get('y1label_size', 8)
+        self.y2_label_size = kwargs.get('y2label_size', 8)
         self.x_label_size = kwargs.get('xlabel_size', 8)
         self.bar_label_size = kwargs.get('bar_label_size', 8)
         self.title = kwargs.get('Title', 'Title')
@@ -52,14 +54,15 @@ class combochart(DefaultChart):
         ax1.tick_params(axis='x', labelrotation=45, size=10) 
 
         # Align legends
+        ax1.set_xlabel("test!")
         
         ax1.legend(loc='lower center',  bbox_to_anchor=(0.25, -.6), fontsize='x-small',ncol=3, frameon=False)
         ax2.legend(loc='lower right',  bbox_to_anchor=(0.75, -.6), fontsize='x-small',ncol=1, frameon=False)
         # Labels and title
-        ax1.set_ylabel(" bar value", fontsize=10)
+        ax1.set_ylabel(self.y1_label, fontsize=self.y1_label_size)
         
-        ax2.set_ylabel(" value value", fontsize=10)
-        plt.title("Combo Chart: Clustered Bars + Line")
+        ax2.set_ylabel(self.y2_label, fontsize=self.y2_label_size)
+        plt.title(self.title)
 
 
 
