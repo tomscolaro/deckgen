@@ -97,7 +97,10 @@ class doubleCluster(DefaultChart):
         plt.ticklabel_format(style='plain', axis='y')
         # Define a formatter function to add "mm"
         def mm_formatter(x, pos):
-            return f"{x/ self.scale:.0f}mm" # Format as integer with "mm"
+            if self.scale ==1000:
+                return f"{x/ self.scale:.0f}k" # Format as integer with "mm"
+            if self.scale ==1000000:
+                return f"{x/ self.scale:.0f}mm" # Format as integer with "mm"
         # Apply the formatter to the y-axis
         plt.gca().yaxis.set_major_formatter(FuncFormatter(mm_formatter))
 
