@@ -24,6 +24,7 @@ class doubleCluster(DefaultChart):
         self.x_label = kwargs.get('xlabel', 'xlabel')
         self.y_label_size = kwargs.get('ylabel_size', 8)
         self.x_label_size = kwargs.get('xlabel_size', 8)
+        self.bar_label_size = kwargs.get('bar_label_size', 8)
         self.title = kwargs.get('Title', 'Title')
 
         return 
@@ -90,7 +91,7 @@ class doubleCluster(DefaultChart):
         )
         # # Final formatting
         for c in ax.containers:
-            ax.bar_label(c, fmt='{:.1f}M'.format, labels=[ int(val) / 1000000 for val in c.datavalues], fontsize=10)
+            ax.bar_label(c, fmt='{:.1f}M'.format, labels=[ (val) / 1000000 for val in c.datavalues], fontsize=self.bar_label_size)
      
 
         plt.ticklabel_format(style='plain', axis='y')
