@@ -28,6 +28,7 @@ class combochart(DefaultChart):
         self.x_label_size = kwargs.get('xlabel_size', 8)
         self.bar_label_size = kwargs.get('bar_label_size', 8)
         self.title = kwargs.get('Title', 'Title')
+        self.line_color = kwargs.get('line_color', 'black')
 
         return 
     
@@ -46,18 +47,18 @@ class combochart(DefaultChart):
 
         # Plot line on same axis
         ax2 = ax1.twinx()
-        sns.lineplot(data=line_data, x=self.XAxis, y=self.line_col, ax=ax2, marker='o', color='black', linewidth=2, label=self.line_col)
+        sns.lineplot(data=line_data, x=self.XAxis, y=self.line_col, ax=ax2, color=self.line_color, linewidth=1, label=self.line_col)
 
 
 
-        plt.rcParams["ytick.labelsize"] = 12
-        ax1.tick_params(axis='x', labelrotation=45, size=10) 
+        plt.rcParams["ytick.labelsize"] = self.y1_label_size
+        ax1.tick_params(axis='x', labelrotation=45, size=self.x_label_size) 
 
         # Align legends
-        ax1.set_xlabel("test!")
+        ax1.set_xlabel(self.x_label,fontsize=self.x_label_size)
         
-        ax1.legend(loc='lower center',  bbox_to_anchor=(0.25, -.6), fontsize='x-small',ncol=3, frameon=False)
-        ax2.legend(loc='lower right',  bbox_to_anchor=(0.75, -.6), fontsize='x-small',ncol=1, frameon=False)
+        ax1.legend(loc='lower center',  bbox_to_anchor=(0.4, -.6), fontsize='x-small',ncol=3, frameon=False)
+        ax2.legend(loc='lower right',  bbox_to_anchor=(0.6, -.6), fontsize='x-small',ncol=1, frameon=False)
         # Labels and title
         ax1.set_ylabel(self.y1_label, fontsize=self.y1_label_size)
         
