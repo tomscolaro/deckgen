@@ -26,12 +26,12 @@ class combochart(DefaultChart):
         self.y1_label_size = kwargs.get('y1label_size', 8)
         self.y2_label_size = kwargs.get('y2label_size', 8)
         self.x_label_size = kwargs.get('xlabel_size', 8)
-        self.bar_label_size = kwargs.get('bar_label_size', 8)
+        self.bar_label_size = kwargs.get('bar_label_size', 4)
         self.title = kwargs.get('Title', 'Title')
         self.line_color = kwargs.get('line_color', 'black')
         self.legend_x1 = kwargs.get('legendX1', .35)
         self.legend_x2 = kwargs.get('legendX2', .35)
-        self.scale = kwargs.get('scale', 1_000_000)
+        self.bscale = kwargs.get('bscale', 1_000_000)
 
         return 
     
@@ -47,7 +47,7 @@ class combochart(DefaultChart):
 
             # Add labels to each bar
         for c in ax1.containers:
-            ax1.bar_label(c, fmt='{:,.1f}M'.format, labels=[ round(val / self.scale, 1) if val > 0 else '' for val in c.datavalues ], fontsize=self.bar_label_size, label_type='center')
+            ax1.bar_label(c, fmt='{:,.1f}M'.format, labels=[ round(val / self.bscale, 1) if val > 0 else '' for val in c.datavalues ], fontsize=self.bar_label_size, label_type='center')
 
         # Calculate line values (averages across groups for each category here, you can customize)
         line_data = self.data.groupby(self.XAxis)[self.line_col].sum().reset_index()
