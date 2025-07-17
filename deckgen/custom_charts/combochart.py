@@ -55,7 +55,11 @@ class combochart(DefaultChart):
 
         # Plot line on same axis
         ax2 = ax1.twinx()
-        sns.lineplot(data=line_data, x=self.XAxis, y=self.line_col, ax=ax2, color=self.line_color, markers=True, linewidth=1, label=self.line_col)
+        sns.lineplot(data=line_data, x=self.XAxis, y=self.line_col, ax=ax2, color=self.line_color, marker='o', linewidth=1, label=self.line_col)
+        # Add labels to each point
+        for i, row in df.iterrows():
+            ax1.text(row[self.XAxis], row[self.line_col] + 0.2, row[self.line_col], ha='center', fontsize=10)
+
 
 
 
