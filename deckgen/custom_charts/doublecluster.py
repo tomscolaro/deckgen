@@ -21,6 +21,7 @@ class doubleCluster(DefaultChart):
 
         self.color_palette = kwargs.get('palette', 'pastel') 
         self.y_label = kwargs.get('ylabel', 'ylabel')
+        self.ylabel_prefix = kwargs.get('ylabel_prefix', 'ylabel_prefix')
         self.x_label = kwargs.get('xlabel', 'xlabel')
         self.y_label_size = kwargs.get('ylabel_size', 8)
         self.x_label_size = kwargs.get('xlabel_size', 8)
