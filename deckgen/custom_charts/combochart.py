@@ -55,7 +55,7 @@ class combochart(DefaultChart):
 
         # Plot line on same axis
         ax2 = ax1.twinx()
-        sns.lineplot(data=line_data, x=self.XAxis, y=self.line_col, ax=ax2, color=self.line_color, markers="o", linewidth=1, label=self.line_col)
+        sns.lineplot(data=line_data, x=self.XAxis, y=self.line_col, ax=ax2, color=self.line_color, markers=True, linewidth=1, label=self.line_col)
 
 
 
