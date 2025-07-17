@@ -65,7 +65,7 @@ class combochart(DefaultChart):
             plt.ylim(0, self.ax1_max)
         # Plot line on same axis
         ax2 = ax1.twinx()
-        sns.lineplot(data=line_data, x=self.XAxis, y=self.line_col, ax=ax2, color=self.line_color, marker='o', linewidth=1, label=self.line_col)
+        sns.lineplot(data=line_data, x=self.XAxis, y=self.line_col, ax=ax2, color=self.line_color, marker='.', linewidth=1, label=self.line_col)
         # Add labels to each point
         for _, row in self.data.iterrows():
             ax2.text(row[self.XAxis], round(row[self.line_col] + self.label_skew, 1), self.y2_label_prefix + str(round(row[self.line_col], 1)), ha='center', fontsize=self.line_label_size)
