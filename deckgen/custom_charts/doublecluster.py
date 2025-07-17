@@ -72,7 +72,7 @@ class doubleCluster(DefaultChart):
             color=sns.color_palette("grey")[3]
         )
         for c in ax.containers:
-            ax.bar_label(c, fmt='{:,.1f}M'.format, 
+            ax.bar_label(c, fmt='{:self.ylabel_prefix,.1f}M'.format, 
                          labels=[ round(val / self.scale, 1) for val in c.datavalues], 
                          fontsize=self.bar_label_size, 
                          label_type='center')
