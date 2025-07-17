@@ -25,6 +25,7 @@ class combochart(DefaultChart):
         self.y2_label_size = kwargs.get('y2label_size', 8)
         self.x_label_size = kwargs.get('xlabel_size', 8)
         self.bar_label_size = kwargs.get('bar_label_size', 4)
+        self.line_label_size = kwargs.get('line_label_size', 4)
         self.title = kwargs.get('Title', 'Title')
         self.line_color = kwargs.get('line_color', 'black')
         self.legend_x1 = kwargs.get('legendX1', .35)
@@ -58,7 +59,7 @@ class combochart(DefaultChart):
         sns.lineplot(data=line_data, x=self.XAxis, y=self.line_col, ax=ax2, color=self.line_color, marker='o', linewidth=1, label=self.line_col)
         # Add labels to each point
         for i, row in self.data.iterrows():
-            ax1.text(row[self.XAxis], row[self.line_col] + 0.2, row[self.line_col], ha='center', fontsize=10)
+            ax1.text(row[self.XAxis], row[self.line_col] + 0.2, row[self.line_col], ha='center', fontsize=self.line_label_size)
 
 
 
