@@ -53,8 +53,8 @@ class combochart(DefaultChart):
 
             # Add labels to each bar
         for c in ax1.containers:
-            ax1.bar_label(c, fmt='{:self.y1_label_prefix,.1f}M'.format, 
-                          labels=[  round(val / self.bscale, 1) if val > 0 else '' for val in c.datavalues ],
+            ax1.bar_label(c, fmt='{:,.1f}M'.format, 
+                          labels=[ self.y1_label_prefix+ str(round(val / self.bscale, 1)) if val > 0 else '' for val in c.datavalues ],
                           fontsize=self.bar_label_size, 
                           label_type='center')
 
