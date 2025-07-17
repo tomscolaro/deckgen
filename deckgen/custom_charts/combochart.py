@@ -31,7 +31,7 @@ class combochart(DefaultChart):
         self.legend_x1 = kwargs.get('legendX1', .35)
         self.legend_x2 = kwargs.get('legendX2', .35)
         self.bscale = kwargs.get('bscale', 1)
-        self.label_skew = kwargs.get('label_skew', .5)
+        self.label_skew = float(kwargs.get('label_skew', .5))
         return 
     
     def plot(self, **kwargs): 
