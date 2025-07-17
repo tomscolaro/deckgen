@@ -32,6 +32,9 @@ class combochart(DefaultChart):
         self.legend_x2 = kwargs.get('legendX2', .35)
         self.bscale = kwargs.get('bscale', 1)
         self.label_skew = float(kwargs.get('label_skew', .5))
+
+        self.ax1_max = kwargs.get('ax1_max', None)
+        self.ax2_max = kwargs.get('ax2_max', None)
         return 
     
     def plot(self, **kwargs): 
@@ -53,7 +56,9 @@ class combochart(DefaultChart):
 
         # Calculate line values (averages across groups for each category here, you can customize)
         line_data = self.data.groupby(self.XAxis)[self.line_col].sum().reset_index()
-
+        
+        if self.ax1_max: 
+            plt.ylim(0, self.ax1_max)
         # Plot line on same axis
         ax2 = ax1.twinx()
         sns.lineplot(data=line_data, x=self.XAxis, y=self.line_col, ax=ax2, color=self.line_color, marker='o', linewidth=1, label=self.line_col)
@@ -77,7 +82,8 @@ class combochart(DefaultChart):
         
         ax2.set_ylabel(self.y2_label, fontsize=self.y2_label_size)
         plt.title(self.title)
-        plt.ylim(0, 10)
+        if self.ax2_max: 
+            plt.ylim(0, self.ax2_max)
 
 
 
