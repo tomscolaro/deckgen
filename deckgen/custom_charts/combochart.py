@@ -31,7 +31,7 @@ class combochart(DefaultChart):
         self.legend_x1 = kwargs.get('legendX1', .35)
         self.legend_x2 = kwargs.get('legendX2', .35)
         self.bscale = kwargs.get('bscale', 1)
-
+        self.label_skew = kwargs.get('label_skew', .5)
         return 
     
     def plot(self, **kwargs): 
@@ -59,7 +59,7 @@ class combochart(DefaultChart):
         sns.lineplot(data=line_data, x=self.XAxis, y=self.line_col, ax=ax2, color=self.line_color, marker='o', linewidth=1, label=self.line_col)
         # Add labels to each point
         for _, row in self.data.iterrows():
-            ax2.text(row[self.XAxis], round(row[self.line_col] + 1, 1), round(row[self.line_col] + 1, 1), ha='center', fontsize=self.line_label_size)
+            ax2.text(row[self.XAxis], round(row[self.line_col] + self.label_skew, 1), round(row[self.line_col] + 1, 1), ha='center', fontsize=self.line_label_size)
 
 
 
