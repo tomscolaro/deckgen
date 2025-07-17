@@ -77,6 +77,7 @@ class combochart(DefaultChart):
         
         ax2.set_ylabel(self.y2_label, fontsize=self.y2_label_size)
         plt.title(self.title)
+        plt.ylim(0, 7)
 
 
 
