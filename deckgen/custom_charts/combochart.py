@@ -16,8 +16,6 @@ class combochart(DefaultChart):
         self.size = kwargs['size']
         self.measureLabel = kwargs.get('measureLabel', 'measure')
         self.valSelector = kwargs.get('valSelector', 'valSelector')
-
-
         
         self.color_palette = kwargs.get('palette', 'pastel') 
         self.y1_label = kwargs.get('ylabel1', 'ylabel1')
@@ -31,7 +29,7 @@ class combochart(DefaultChart):
         self.line_color = kwargs.get('line_color', 'black')
         self.legend_x1 = kwargs.get('legendX1', .35)
         self.legend_x2 = kwargs.get('legendX2', .35)
-        self.bscale = kwargs.get('bscale', 1_000_000)
+        self.bscale = kwargs.get('bscale', 1)
 
         return 
     
@@ -40,21 +38,24 @@ class combochart(DefaultChart):
         bar_data = self.data.melt(id_vars=[self.XAxis], value_vars=self.bar_cols,  var_name=self.measureLabel)
 
         # Set figure and axis
-        fig, ax1 = plt.subplots(figsize=self.size)
+        _, ax1 = plt.subplots(figsize=self.size)
 
         # Clustered barplot with seaborn
         sns.barplot(data=bar_data, x=self.XAxis, y='value', hue=self.measureLabel, ax=ax1, palette=self.color_palette)
 
             # Add labels to each bar
         for c in ax1.containers:
-            ax1.bar_label(c, fmt='{:,.1f}M'.format, labels=[ round(val / self.bscale, 1) if val > 0 else '' for val in c.datavalues ], fontsize=self.bar_label_size, label_type='center')
+            ax1.bar_label(c, fmt='{:,.1f}M'.format, 
+                          labels=[ round(val / self.bscale, 1) if val > 0 else '' for val in c.datavalues ],
+                          fontsize=self.bar_label_size, 
+                          label_type='center')
 
         # Calculate line values (averages across groups for each category here, you can customize)
         line_data = self.data.groupby(self.XAxis)[self.line_col].sum().reset_index()
 
         # Plot line on same axis
         ax2 = ax1.twinx()
-        sns.lineplot(data=line_data, x=self.XAxis, y=self.line_col, ax=ax2, color=self.line_color, linewidth=1, label=self.line_col)
+        sns.lineplot(data=line_data, x=self.XAxis, y=self.line_col, ax=ax2, color=self.line_color, markers="o", linewidth=1, label=self.line_col)
 
 
 

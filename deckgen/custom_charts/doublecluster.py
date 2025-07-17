@@ -71,7 +71,10 @@ class doubleCluster(DefaultChart):
             color=sns.color_palette("grey")[3]
         )
         for c in ax.containers:
-            ax.bar_label(c, fmt='{:,.1f}M'.format, labels=[ round(val / self.scale, 1) for val in c.datavalues], fontsize=self.bar_label_size, label_type='center')
+            ax.bar_label(c, fmt='{:,.1f}M'.format, 
+                         labels=[ round(val / self.scale, 1) for val in c.datavalues], 
+                         fontsize=self.bar_label_size, 
+                         label_type='center')
 
         # Plot stacked bars
         bottom = [0] * len(all_dates)
@@ -86,18 +89,12 @@ class doubleCluster(DefaultChart):
                 color=category_colors[category]
             )
             bottom = [b + v for b, v in zip(bottom, values)]
-            ax.bar_label(p, fmt='{:,.1f}M'.format, labels=[ round(val / self.scale, 1) if val > 0 else '' for val in p.datavalues ], fontsize=self.bar_label_size, label_type='center')
+            ax.bar_label(p, fmt='{:,.1f}M'.format, 
+                         labels=[ round(val / self.scale, 1) if val > 0 else '' for val in p.datavalues ], 
+                         fontsize=self.bar_label_size, 
+                         label_type='center')
 
 
-        # for c in ax.containers:
-        #     ax.bar_label(c, fmt='{:,.1f}M'.format, labels=[int(val) / 1_000_000 for val in c.datavalues])
-        # Plot total bars
-
-
-        # # Final formatting
-        # for c in ax.containers:
-        #     ax.bar_label(c, fmt='{:.2f}M'.format, labels=[ round(val / self.scale, 2) for val in c.datavalues], fontsize=self.bar_label_size)
-     
 
         plt.ticklabel_format(style='plain', axis='y')
         # Define a formatter function to add "mm"
