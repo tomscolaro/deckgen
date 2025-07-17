@@ -31,6 +31,7 @@ class combochart(DefaultChart):
         self.line_color = kwargs.get('line_color', 'black')
         self.legend_x1 = kwargs.get('legendX1', .35)
         self.legend_x2 = kwargs.get('legendX2', .35)
+        self.scale = kwargs.get('scale', 1_000_000)
 
         return 
     
