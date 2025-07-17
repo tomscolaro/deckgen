@@ -58,8 +58,8 @@ class combochart(DefaultChart):
         ax2 = ax1.twinx()
         sns.lineplot(data=line_data, x=self.XAxis, y=self.line_col, ax=ax2, color=self.line_color, marker='o', linewidth=1, label=self.line_col)
         # Add labels to each point
-        for i, row in self.data.iterrows():
-            ax2.text(round(row[self.XAxis],1), row[self.line_col] + 0.2, row[self.line_col], ha='center', fontsize=self.line_label_size)
+        for _, row in self.data.iterrows():
+            ax2.text(row[self.XAxis], round(row[self.line_col] + 0.2, 1), row[self.line_col], ha='center', fontsize=self.line_label_size)
 
 
 
