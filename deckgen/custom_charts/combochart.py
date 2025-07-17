@@ -21,7 +21,7 @@ class combochart(DefaultChart):
         self.y1_label = kwargs.get('ylabel1', 'ylabel1')
         self.y2_label = kwargs.get('ylabel2', 'ylabel2')
         self.y1_label_prefix = kwargs.get('y1label_prefix', 'ylabel1_prefix')
-        self.y2_label_prefix = kwargs.get('y2slabel_prefix', 'ylabel2_prefix2')
+        self.y2_label_prefix = kwargs.get('y2label_prefix', 'ylabel2_prefix2')
 
 
         self.x_label = kwargs.get('xlabel', 'xlabel')
