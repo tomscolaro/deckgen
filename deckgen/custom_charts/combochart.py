@@ -45,7 +45,7 @@ class combochart(DefaultChart):
         sns.barplot(data=bar_data, x=self.XAxis, y='value', hue=self.measureLabel, ax=ax1, palette=self.color_palette)
 
             # Add labels to each bar
-        for container in ax.containers:
+        for container in ax1.containers:
             ax1.bar_label(container, fmt='%.0f') # fmt specifies the format for the labels (e.g., no decimal places)
 
         # Calculate line values (averages across groups for each category here, you can customize)
