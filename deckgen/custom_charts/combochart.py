@@ -53,7 +53,7 @@ class combochart(DefaultChart):
 
             # Add labels to each bar
         for c in ax1.containers:
-            ax1.bar_label(c, fmt=self.y1_label_prefix +'{:,.1f}M'.format, 
+            ax1.bar_label(c, fmt=self.y1_label_prefix +'{:self.y1_label_prefix,.1f}M'.format, 
                           labels=[  round(val / self.bscale, 1) if val > 0 else '' for val in c.datavalues ],
                           fontsize=self.bar_label_size, 
                           label_type='center')
@@ -68,7 +68,7 @@ class combochart(DefaultChart):
         sns.lineplot(data=line_data, x=self.XAxis, y=self.line_col, ax=ax2, color=self.line_color, marker='o', linewidth=1, label=self.line_col)
         # Add labels to each point
         for _, row in self.data.iterrows():
-            ax2.text(row[self.XAxis], round(row[self.line_col] + self.label_skew, 1), round(row[self.line_col] + 1, 1), ha='center', fontsize=self.line_label_size)
+            ax2.text(row[self.XAxis], round(row[self.line_col] + self.label_skew, 1), self.y2_label_prefix + str(round(row[self.line_col], 1)), ha='center', fontsize=self.line_label_size)
 
 
 
